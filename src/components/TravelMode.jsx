@@ -1,3 +1,4 @@
+import { useLanguage } from '../contexts/LanguageContext'
 import { places } from '../logics/places'
 
 // Format number with dot as thousands separator (no decimals)
@@ -17,6 +18,7 @@ export default function TravelMode({
   money, 
   onTravel 
 }) {
+  const { t } = useLanguage()
   const currentPlace = places.find(p => p.id === currentPlaceId)
   const availablePlaces = places.filter(p => p.id !== currentPlaceId)
   
@@ -31,8 +33,8 @@ export default function TravelMode({
         >
           <div className="destination-overlay"></div>
           <div className="destination-name">{currentPlace?.name}</div>
-          <div className="destination-details">Stay this month</div>
-          <div className="destination-price free">FREE</div>
+          <div className="destination-details">{t('stayThisMonth')}</div>
+          <div className="destination-price free">{t('free')}</div>
         </button>
         
         {/* Other 5 places - travel and advance month */}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useLanguage } from '../contexts/LanguageContext'
 import GameHUD from '../components/GameHUD'
 import GameArea from '../components/GameArea'
 import GameFooter from '../components/GameFooter'
@@ -25,16 +26,11 @@ const INITIAL_MONEY = 666
 const START_MONTH = 3 // April (0-indexed: 0=Jan, 3=April)
 const START_YEAR = 2026
 
-const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-]
-
 const TABS = [
-  { id: 'market', label: '🏪 Market', icon: '🏪' },
-  { id: 'hangar', label: '🔧 Hangar', icon: '🔧' },
-  { id: 'lodge', label: '🏠 Lodge', icon: '🏠' },
-  { id: 'character', label: '👤 Character', icon: '👤' },
+  { id: 'market', label: '🏪 Market' },
+  { id: 'hangar', label: '🔧 Hangar' },
+  { id: 'lodge', label: '🏠 Lodge' },
+  { id: 'character', label: '👤 Character' },
 ]
 
 // Format number with dot as thousands separator (no decimals)
@@ -50,6 +46,7 @@ function formatMoney(money) {
 
 function GameScreen() {
   const location = useLocation()
+  const { t, getMonth } = useLanguage()
   
   // Get game config from navigation state
   const gameConfig = location.state || {}
@@ -72,6 +69,17 @@ function GameScreen() {
   const [travelMode, setTravelMode] = useState(false)
   const [selectedDestination, setSelectedDestination] = useState(null)
   
+  // Get translated tab labels
+  const getTabLabel = (tabId) => {
+    switch (tabId) {
+      case 'market': return t('tabMarket')
+      case 'hangar': return t('tabHangar')
+      case 'lodge': return t('tabLodge')
+      case 'character': return t('tabCharacter')
+      default: return tabId
+    }
+  }
+  
   // Initialize prices and inventory on mount
   useEffect(() => {
     const prices = generateLocationPrices(places, products)
@@ -80,7 +88,7 @@ function GameScreen() {
   }, [])
   
   // Format date for display
-  const formattedDate = MONTHS[month] + ' ' + year
+  const formattedDate = getMonth(month) + ' ' + year
   
   // Handle buy item
   const handleBuy = (productId, quantity, price) => {
@@ -107,19 +115,19 @@ function GameScreen() {
   // Handle buy plane
   const handleBuyPlane = (plane) => {
     if (money >= plane.price) {
-      if (confirm('Buy this plane? Your current plane will be traded in.')) {
+      if (confirm(t('confirmBuyPlane'))) {
         setMoney(money - plane.price + Math.floor(currentPlane.price * 0.5)) // 50% trade-in
         setCurrentPlane(plane)
       }
     } else {
-      alert('Not enough money!')
+      alert(t('notEnoughMoney'))
     }
   }
   
   // Handle travel to new location
   const handleTravel = (newLocationId, travelCost) => {
     if (travelCost > 0 && money < travelCost) {
-      alert('Not enough money for fuel!')
+      alert(t('notEnoughFuel'))
       return
     }
     
@@ -223,6 +231,9 @@ function GameScreen() {
         return null
     }
   }
+
+  // Get travel mode text
+  const travelConfirmText = travelMode ? t('confirmBtn') : t('goBtn')
   
   return (
     <div className="game-screen">
@@ -239,7 +250,7 @@ function GameScreen() {
                   className={'tab-btn ' + (activeTab === tab.id ? 'active' : '')}
                   onClick={() => setActiveTab(tab.id)}
                 >
-                  {tab.label}
+                  {getTabLabel(tab.id)}
                 </button>
               ))}
             </div>
@@ -269,6 +280,7 @@ function GameScreen() {
         money={money}
         selectedDestination={selectedDestination}
         travelMode={travelMode}
+        confirmText={travelConfirmText}
       />
     </div>
   )

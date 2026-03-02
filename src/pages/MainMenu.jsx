@@ -1,13 +1,30 @@
 import { useNavigate } from 'react-router-dom'
+import { useLanguage } from '../contexts/LanguageContext'
 
 function MainMenu() {
   const navigate = useNavigate()
+  const { language, t, toggleLanguage } = useLanguage()
   
   return (
     <div className="main-menu">
+      <div className="language-toggle-container">
+        <button 
+          className={`lang-btn ${language === 'en' ? 'active' : ''}`}
+          onClick={() => language !== 'en' && toggleLanguage()}
+        >
+          EN
+        </button>
+        <button 
+          className={`lang-btn ${language === 'es' ? 'active' : ''}`}
+          onClick={() => language !== 'es' && toggleLanguage()}
+        >
+          ES
+        </button>
+      </div>
+      
       <div className="menu-logo">
         <h1>🍕</h1>
-        <h2>PIZZA WARS</h2>
+        <h2>{t('pizzaWars')}</h2>
       </div>
       
       <div className="menu-buttons">
@@ -15,18 +32,18 @@ function MainMenu() {
           className="menu-button primary"
           onClick={() => navigate('/newgame')}
         >
-          NEW GAME
+          {t('newGame')}
         </button>
         
         <button 
           className="menu-button secondary"
-          onClick={() => alert('Load Game - Coming soon!')}
+          onClick={() => alert(t('comingSoon'))}
         >
-          LOAD GAME
+          {t('loadGame')}
         </button>
         
         <button className="menu-button secondary">
-          HOW TO PLAY
+          {t('howToPlay')}
         </button>
       </div>
     </div>

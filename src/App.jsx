@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 
+// Context
+import { LanguageProvider, useLanguage } from './contexts/LanguageContext'
+
 // Pages
 import SplashScreen from './pages/SplashScreen'
 import MainMenu from './pages/MainMenu'
@@ -11,6 +14,7 @@ import GameOverScreen from './pages/GameOverScreen'
 function AppContent() {
   const location = useLocation()
   const isGameScreen = location.pathname === '/game'
+  const { t } = useLanguage()
   
   const handleBack = () => {
     window.history.back()
@@ -23,7 +27,7 @@ function AppContent() {
   return (
     <div className="app-container">
       <header className="header">
-        <h1>Pizza Wars</h1>
+        <h1>{t('pizzaWars')}</h1>
       </header>
       
       <main className="main-content">
@@ -39,15 +43,15 @@ function AppContent() {
       {isGameScreen ? (
         <div className="game-footer">
           <button className="footer-btn back-btn" onClick={handleBack}>
-            ← BACK
+            {t('back')}
           </button>
           <button className="footer-btn next-btn" onClick={handleNextMonth}>
-            NEXT MONTH →
+            {t('nextMonth')} →
           </button>
         </div>
       ) : (
         <footer className="footer">
-          <p>© 2026 Pizza Wars</p>
+          <p>{t('footer')}</p>
         </footer>
       )}
     </div>
@@ -57,7 +61,9 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
     </BrowserRouter>
   )
 }

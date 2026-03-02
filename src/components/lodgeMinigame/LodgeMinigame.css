@@ -1,0 +1,477 @@
+/* Lodge Minigame Styles */
+.lm-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 15px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #8b0000;
+}
+
+.lm-language-toggle {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.lm-lang-btn {
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid #3d0000;
+  color: #666;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+}
+
+.lm-lang-btn:hover, .lm-lang-btn.active {
+  background: #8b0000;
+  color: #0a0a0a;
+  box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+}
+
+.lm-title {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  color: #8b0000;
+  text-align: center;
+  position: relative;
+}
+
+.lm-subtitle {
+  font-size: 0.75rem;
+  color: #444;
+  margin-bottom: 15px;
+  font-style: italic;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.lm-game-container {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.lm-hangman-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lm-hangman-drawing {
+  width: 160px;
+  height: 200px;
+  position: relative;
+  background: radial-gradient(ellipse at center, rgba(139, 0, 0, 0.1) 0%, transparent 70%);
+  border-radius: 10px;
+}
+
+.lm-hangman-drawing svg {
+  width: 100%;
+  height: 100%;
+}
+
+.lm-gallows {
+  stroke: #2a1a1a;
+  stroke-width: 4;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.lm-hangman-part {
+  fill: none;
+  stroke: #8b0000;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 5px #ff0000);
+}
+
+@keyframes lm-appear {
+  from { 
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.lm-creepy-eye {
+  position: absolute;
+  top: 55px;
+  right: 45px;
+  width: 10px;
+  height: 10px;
+  background: #ff0000;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+  animation: lm-eyePulse 2s infinite;
+}
+
+.lm-creepy-eye.show {
+  opacity: 1;
+}
+
+@keyframes lm-eyePulse {
+  0%, 90%, 100% { 
+    background: #8b0000;
+    box-shadow: 0 0 5px #ff0000;
+  }
+  95% { 
+    background: #ff0000;
+    box-shadow: 0 0 15px #ff0000;
+  }
+}
+
+.lm-blood-drip {
+  position: absolute;
+  top: 65px;
+  right: 48px;
+  width: 3px;
+  height: 30px;
+  background: linear-gradient(180deg, #8b0000 0%, #3d0000 100%);
+  transform: scaleY(0);
+  transform-origin: top;
+  opacity: 0;
+  transition: all 0.3s;
+  animation: lm-bloodDrip 2s infinite;
+  border-radius: 0 0 5px 5px;
+}
+
+.lm-blood-drip.show {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+@keyframes lm-bloodDrip {
+  0%, 100% { 
+    transform: scaleY(1) translateY(0);
+  }
+  50% { 
+    transform: scaleY(1) translateY(10px);
+  }
+}
+
+.lm-game-info {
+  flex: 1;
+  min-width: 250px;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.lm-question-box {
+  background: linear-gradient(180deg, rgba(20, 0, 0, 0.9) 0%, rgba(10, 0, 0, 0.95) 100%);
+  border: 1px solid #3d0000;
+  border-radius: 5px;
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-shadow: 
+    0 0 15px rgba(139, 0, 0, 0.2),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.lm-question-box::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #8b0000, #3d0000, #8b0000);
+  border-radius: 7px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.lm-question-label {
+  font-size: 0.7rem;
+  color: #8b0000;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.lm-question-text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #666;
+  font-family: 'Times New Roman', serif;
+}
+
+.lm-answer-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin: 15px 0;
+}
+
+.lm-letter-box {
+  width: 28px;
+  height: 36px;
+  border-bottom: 2px solid #8b0000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: rgba(20, 0, 0, 0.5);
+  border-radius: 3px 3px 0 0;
+  color: #8b0000;
+  transition: all 0.3s;
+}
+
+.lm-letter-box.reveal {
+  animation: lm-pulse 1s infinite;
+}
+
+.lm-letter-box.space {
+  border-bottom: none;
+  width: 10px;
+  background: transparent;
+}
+
+@keyframes lm-pulse {
+  0%, 100% { 
+    text-shadow: 0 0 5px rgba(139, 0, 0, 0.5);
+  }
+  50% { 
+    text-shadow: 0 0 15px rgba(139, 0, 0, 0.8);
+  }
+}
+
+.lm-keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+  margin-top: 15px;
+}
+
+.lm-key {
+  width: 32px;
+  height: 36px;
+  border: 1px solid #3d0000;
+  border-radius: 3px;
+  background: rgba(10, 0, 0, 0.8);
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Courier New', monospace;
+}
+
+.lm-key:hover:not(:disabled) {
+  background: #8b0000;
+  color: #0a0a0a;
+  box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+  transform: scale(1.05);
+}
+
+.lm-key:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.lm-key.correct {
+  background: #1a0a0a;
+  color: #8b0000;
+  border-color: #8b0000;
+}
+
+.lm-key.wrong {
+  background: #3d0000;
+  color: #1a0000;
+  border-color: #1a0000;
+}
+
+.lm-status-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+  padding: 8px 15px;
+  background: rgba(10, 0, 0, 0.5);
+  border: 1px solid #3d0000;
+  border-radius: 5px;
+}
+
+.lm-status-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lm-status-label {
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.7rem;
+}
+
+.lm-status-value {
+  color: #8b0000;
+  font-weight: bold;
+}
+
+.lm-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(5, 0, 0, 0.98);
+  border: 3px solid #8b0000;
+  border-radius: 10px;
+  padding: 30px 40px;
+  text-align: center;
+  z-index: 100;
+  display: none;
+  box-shadow: 
+    0 0 50px rgba(139, 0, 0, 0.5),
+    inset 0 0 30px rgba(139, 0, 0, 0.2);
+  min-width: 280px;
+}
+
+.lm-message.show {
+  display: block;
+  animation: lm-appear 0.5s ease;
+}
+
+.lm-message h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.lm-message.win h2 {
+  color: #2a5a2a;
+  text-shadow: 0 0 15px rgba(42, 90, 42, 0.5);
+}
+
+.lm-message.lose h2 {
+  color: #8b0000;
+}
+
+.lm-message p {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  color: #666;
+  font-family: 'Times New Roman', serif;
+  font-style: italic;
+}
+
+.lm-btn {
+  padding: 12px 30px;
+  font-size: 0.85rem;
+  border: 2px solid #8b0000;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  background: transparent;
+  color: #8b0000;
+}
+
+.lm-btn:hover {
+  background: #8b0000;
+  color: #0a0a0a;
+  box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+}
+
+.lm-question-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.lm-nav-btn {
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid #3d0000;
+  color: #666;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+}
+
+.lm-nav-btn:hover:not(:disabled) {
+  background: #8b0000;
+  color: #0a0a0a;
+}
+
+.lm-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.lm-question-counter {
+  font-size: 0.75rem;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .lm-container {
+    padding: 10px;
+  }
+  
+  .lm-title {
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+  }
+  
+  .lm-game-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .lm-game-info {
+    width: 100%;
+  }
+  
+  .lm-key {
+    width: 28px;
+    height: 32px;
+    font-size: 0.75rem;
+  }
+  
+  .lm-letter-box {
+    width: 24px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+}

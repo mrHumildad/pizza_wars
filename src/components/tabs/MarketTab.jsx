@@ -1,3 +1,4 @@
+import { useLanguage } from '../../contexts/LanguageContext'
 import { products } from '../../logics/products'
 
 // Format number with dot as thousands separator (no decimals)
@@ -25,6 +26,7 @@ export default function MarketTab({
   locationId,
   planeCapacity 
 }) {
+  const { t } = useLanguage()
   const locationProducts = locationPrices[locationId] || {}
   
   // Debug: log prices for current location
@@ -35,11 +37,11 @@ export default function MarketTab({
   return (
     <div className="tab-content market-tab">
       <div className="market-header">
-        <span>Item</span>
-        <span>Owned</span>
-        <span>Price</span>
-        <span>Avg Buy</span>
-        <span>Action</span>
+        <span>{t('colItem')}</span>
+        <span>{t('colOwned')}</span>
+        <span>{t('colPrice')}</span>
+        <span>{t('colAvgBuy')}</span>
+        <span>{t('colAction')}</span>
       </div>
       
       {products.map((product) => {
@@ -75,7 +77,7 @@ export default function MarketTab({
                     onBuy(product.id, qty, currentPrice)
                   }}
                 >
-                  BUY
+                  {t('btnBuy')}
                 </button>
               </div>
               <div className="action-group">
@@ -95,7 +97,7 @@ export default function MarketTab({
                     onSell(product.id, qty, currentPrice)
                   }}
                 >
-                  SELL
+                  {t('btnSell')}
                 </button>
               </div>
             </div>
@@ -104,7 +106,7 @@ export default function MarketTab({
       })}
       
       <div className="capacity-info">
-        Capacity: {totalItems} / {planeCapacity}
+        {t('labelCapacity')}: {totalItems} / {planeCapacity}
       </div>
     </div>
   )

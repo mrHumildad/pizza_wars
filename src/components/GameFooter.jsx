@@ -1,3 +1,5 @@
+import { useLanguage } from '../contexts/LanguageContext'
+
 function GameFooter({ 
   onBack, 
   onSelectDestination,
@@ -7,12 +9,15 @@ function GameFooter({
   fuelCost,
   money,
   selectedDestination,
-  travelMode
+  travelMode,
+  confirmText
 }) {
+  const { t } = useLanguage()
+  
   return (
     <div className="game-footer">
       <button className="footer-btn back-btn" onClick={onBack}>
-        ← BACK
+        {t('back')}
       </button>
 
       <button 
@@ -20,7 +25,7 @@ function GameFooter({
         disabled={selectedDestination === undefined}
         onClick={onConfirm}
       >
-        {travelMode ? 'CONFIRM →' : 'GO →'}
+        {confirmText || t('goBtn')}
       </button>
     </div>
   )

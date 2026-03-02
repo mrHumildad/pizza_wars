@@ -12,6 +12,10 @@
   text-align: center;
 }
 
+.main-menu {
+  position: relative;
+}
+
 /* Splash Screen */
 .splash-video {
   width: 100%;
@@ -1152,4 +1156,35 @@
   .score-value {
     font-size: 4rem;
   }
+}
+
+/* Language Toggle */
+.language-toggle-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 5px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 5px 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.lang-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.lang-btn.active {
+  background: var(--color-primary);
+  color: var(--color-bg);
 }

@@ -1,3 +1,4 @@
+import { useLanguage } from '../../contexts/LanguageContext'
 import { planes } from '../../logics/planes'
 
 // Format number with dot as thousands separator (no decimals)
@@ -16,9 +17,11 @@ export default function HangarTab({
   currentPlane, 
   onBuyPlane 
 }) {
+  const { t } = useLanguage()
+  
   return (
     <div className="tab-content hangar-tab">
-      <h3>Available Planes</h3>
+      <h3>{t('availablePlanes')}</h3>
       <div className="planes-list">
         {planes.map((plane) => {
           const isCurrentPlane = plane.id === currentPlane.id
@@ -28,22 +31,22 @@ export default function HangarTab({
             <div key={plane.id} className={'plane-card ' + (isCurrentPlane ? 'current' : '')}>
               <div className="plane-name">{plane.name}</div>
               <div className="plane-details">
-                <span>Type: {plane.type}</span>
-                <span>Capacity: {plane.capacity}</span>
-                <span>Speed: {plane.speed}</span>
-                <span>Range: {plane.range}</span>
-                <span>Fuel: {formatMoney(plane.fuelCost)}</span>
+                <span>{t('labelType')}: {plane.type}</span>
+                <span>{t('labelCapacity')}: {plane.capacity}</span>
+                <span>{t('labelSpeed')}: {plane.speed}</span>
+                <span>{t('labelRange')}: {plane.range}</span>
+                <span>{t('labelFuel')}: {formatMoney(plane.fuelCost)}</span>
               </div>
               <div className="plane-price">
                 {isCurrentPlane ? (
-                  <span className="owned-badge">OWNED</span>
+                  <span className="owned-badge">{t('badgeOwned')}</span>
                 ) : (
                   <button 
                     className="buy-plane-btn"
                     disabled={!canAfford}
                     onClick={() => onBuyPlane(plane)}
                   >
-                    BUY - {formatMoney(plane.price)}
+                    {t('btnBuyPlane')} - {formatMoney(plane.price)}
                   </button>
                 )}
               </div>

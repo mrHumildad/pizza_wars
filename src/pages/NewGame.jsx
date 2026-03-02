@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useLanguage } from '../contexts/LanguageContext'
 import { places } from '../logics/places'
 
 const characters = [
@@ -11,6 +12,7 @@ const characters = [
 
 function NewGame() {
   const navigate = useNavigate()
+  const { t } = useLanguage()
   const [playerName, setPlayerName] = useState('')
   const [currentCharacterIndex, setCurrentCharacterIndex] = useState(0)
   const [currentPlaceIndex, setCurrentPlaceIndex] = useState(0)
@@ -44,7 +46,7 @@ function NewGame() {
   
   const handleStartGame = () => {
     if (!playerName) {
-      alert('Please enter your name!')
+      alert(t('pleaseEnterName'))
       return
     }
     navigate('/game', { 
@@ -58,16 +60,42 @@ function NewGame() {
   
   return (
     <div className="new-game-screen">
+      <div className="language-toggle-container" style={{position: 'absolute', top: 10, right: 10}}>
+        <button 
+          className="lang-btn"
+          onClick={() => {
+            const currentLang = localStorage.getItem('pizzaWarsLanguage')
+            if (currentLang !== 'en') {
+              localStorage.setItem('pizzaWarsLanguage', 'en')
+              window.location.reload()
+            }
+          }}
+        >
+          EN
+        </button>
+        <button 
+          className="lang-btn"
+          onClick={() => {
+            const currentLang = localStorage.getItem('pizzaWarsLanguage')
+            if (currentLang !== 'es') {
+              localStorage.setItem('pizzaWarsLanguage', 'es')
+              window.location.reload()
+            }
+          }}
+        >
+          ES
+        </button>
+      </div>
       
       <div className="new-game-form">
         {/* Player Name */}
         <div className="form-section">
-          <label>ENTER YOUR NAME</label>
+          <label>{t('enterYourName')}</label>
           <input 
             type="text" 
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
-            placeholder="Your name..."
+            placeholder={t('yourNamePlaceholder')}
             maxLength={20}
           />
         </div>
@@ -89,7 +117,7 @@ function NewGame() {
         
         {/* Place Selection - Single Image */}
         <div className="form-section">
-          <label>SELECT STARTING PLACE</label>
+          <label>{t('selectStartingPlace')}</label>
           <div className="character-carousel">
             <button className="carousel-btn" onClick={handlePrevPlace}>
               ‹
@@ -106,12 +134,12 @@ function NewGame() {
           </div>
         </div>
         
-        {/* Start Button */}
-        <button 
+        {/* Start Button 
           className="menu-button primary start-button"
-          onClick={handleStartGame}
+          */}
+        <button onClick={handleStartGame}
         >
-          START GAME
+          {t('startGame')}
         </button>
       </div>
     </div>
