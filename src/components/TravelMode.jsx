@@ -16,11 +16,30 @@ export default function TravelMode({
   currentPlaceId, 
   fuelCost, 
   money, 
-  onTravel 
+  onTravel,
+  friend 
 }) {
   const { t } = useLanguage()
   const currentPlace = places.find(p => p.id === currentPlaceId)
   const availablePlaces = places.filter(p => p.id !== currentPlaceId)
+  
+  // Product emoji icons
+  const productIcons = {
+    'Pizza': '🍕',
+    'Hot Dog': '🌭',
+    'Cheese': '🧀',
+    'Pasta': '🍝',
+    'Ice Cream': '🍦',
+    'Walnut': '🥜'
+  }
+  
+  // Get friend's favourite icon for a location
+  const getFriendFavIcon = (placeName) => {
+    if (friend && friend.location === placeName && friend.favProduct) {
+      return productIcons[friend.favProduct] || null
+    }
+    return null
+  }
   
   return (
     <div className="travel-mode">
@@ -33,6 +52,9 @@ export default function TravelMode({
         >
           <div className="destination-overlay"></div>
           <div className="destination-name">{currentPlace?.name}</div>
+          {getFriendFavIcon(currentPlace?.name) && (
+            <div className="friend-fav-icon">{getFriendFavIcon(currentPlace?.name)}</div>
+          )}
           <div className="destination-details">{t('stayThisMonth')}</div>
           <div className="destination-price free">{t('free')}</div>
         </button>
@@ -40,6 +62,7 @@ export default function TravelMode({
         {/* Other 5 places - travel and advance month */}
         {availablePlaces.map((place) => {
           const canAfford = money >= fuelCost
+          const friendIcon = getFriendFavIcon(place.name)
           
           return (
             <button 
@@ -51,6 +74,9 @@ export default function TravelMode({
             >
               <div className="destination-overlay"></div>
               <div className="destination-name">{place.name}</div>
+              {friendIcon && (
+                <div className="friend-fav-icon">{friendIcon}</div>
+              )}
               <div className="destination-price">{formatMoney(fuelCost)}</div>
             </button>
           )

@@ -313,6 +313,16 @@
   color: var(--color-text-primary);
 }
 
+.tab-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tab-btn:disabled:hover {
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
 /* Tab Panel */
 .tab-panel {
   flex: 1;
@@ -367,6 +377,10 @@
 .item-name {
   color: var(--color-text-primary);
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
 }
 
 .item-owned {
@@ -377,6 +391,27 @@
 .item-price {
   font-weight: bold;
   color: var(--color-text-primary);
+}
+
+/* Special price modifier styles */
+.item-price.price-special {
+  color: #4ade80; /* Green for multiplier */
+  font-size: 1.1em;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.item-price.price-special.is-divider {
+  color: #f87171; /* Red for divider */
+}
+
+.item-price.price-special::after {
+  content: ' *';
+  font-size: 0.7em;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
 .item-avg {
@@ -637,6 +672,26 @@
   border-radius: 50%;
   border: 3px solid var(--color-border);
   object-fit: cover;
+}
+
+/* Grade Pyramid */
+.grade-pyramid {
+  margin: var(--spacing-sm) 0;
+  font-family: monospace;
+  font-size: 0.4rem;
+  line-height: 1;
+}
+
+.pyramid-row {
+  white-space: pre;
+}
+
+.pyramid-row.filled {
+  color: var(--color-accent-primary);
+}
+
+.pyramid-row.empty {
+  color: var(--color-border);
 }
 
 /* Game Area */
@@ -916,6 +971,13 @@
   font-weight: bold;
   font-size: 1rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.destination-card .friend-fav-icon {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+  margin-top: 4px;
 }
 
 .destination-card .destination-details {

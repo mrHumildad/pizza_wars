@@ -8,6 +8,7 @@ import MarketTab from '../components/tabs/MarketTab'
 import HangarTab from '../components/tabs/HangarTab'
 import LodgeTab from '../components/tabs/LodgeTab'
 import CharacterTab from '../components/tabs/CharacterTab'
+import MailTab from '../components/tabs/MailTab'
 import TravelMode from '../components/TravelMode'
 import { places } from '../logics/places'
 import { products } from '../logics/products'
@@ -30,6 +31,7 @@ const TABS = [
   { id: 'market', label: '🏪 Market' },
   { id: 'hangar', label: '🔧 Hangar' },
   { id: 'lodge', label: '🏠 Lodge' },
+  { id: 'mail', label: '📧 Mail' },
   { id: 'character', label: '👤 Character' },
 ]
 
@@ -50,7 +52,7 @@ function GameScreen() {
   
   // Get game config from navigation state
   const gameConfig = location.state || {}
-  const { playerName, character, startingPlace } = gameConfig
+  const { playerName, character, startingPlace, friend } = gameConfig
   
   const initialLocationId = startingPlace?.id || 1
   
@@ -65,9 +67,19 @@ function GameScreen() {
   const [currentPlane, setCurrentPlane] = useState(cheapestPlane)
   const [activeTab, setActiveTab] = useState('market')
   const [locationPrices, setLocationPrices] = useState({})
+  const [locationAvailability, setLocationAvailability] = useState({})
   const [inventory, setInventory] = useState({})
   const [travelMode, setTravelMode] = useState(false)
   const [selectedDestination, setSelectedDestination] = useState(null)
+  
+  // Grade system - starts at grade 1
+  const [grade, setGrade] = useState(1)
+  // Lodge is disabled after use until next turn/month
+  const [lodgeEnabled, setLodgeEnabled] = useState(true)
+  // Previous turn's special (applied to current prices)
+  const [previousSpecial, setPreviousSpecial] = useState(null)
+  // Player mails
+  const [mails, setMails] = useState([])
   
   // Get translated tab labels
   const getTabLabel = (tabId) => {
@@ -80,10 +92,11 @@ function GameScreen() {
     }
   }
   
-  // Initialize prices and inventory on mount
+  // Initialize prices and inventory on mount (Turn 1 - no special)
   useEffect(() => {
-    const prices = generateLocationPrices(places, products)
-    setLocationPrices(prices)
+    const result = generateLocationPrices(places, products, friend)
+    setLocationPrices(result.prices)
+    setLocationAvailability(result.availability)
     setInventory(initializeInventory(products))
   }, [])
   
@@ -157,9 +170,50 @@ function GameScreen() {
       return newMonth
     })
     
-    // Generate new prices for ALL places for next turn and log to console
-    const newPrices = advanceAllPrices(places, products, locationPrices)
-    setLocationPrices(newPrices)
+    // Generate new prices with previous special applied, and next special
+    const result = advanceAllPrices(places, products, locationPrices, previousSpecial, friend)
+    setLocationPrices(result.prices)
+    setLocationAvailability(result.availability)
+    setPreviousSpecial(result.nextSpecial)
+    
+    // Check if friend's location has special next week (using result.nextSpecial)
+    if (friend && result.nextSpecial) {
+      const friendPlace = places.find(p => p.name === friend.location)
+      if (friendPlace && friendPlace.id === result.nextSpecial.placeId) {
+        // Friend is at the location of next week's special!
+        const isFavProduct = friend.favProduct && 
+          friend.favProduct.toLowerCase() === result.nextSpecial.productName.toLowerCase()
+        
+        const direction = result.nextSpecial.isMultiplier ? 'UP' : 'DOWN'
+        
+        let mailSubject = 'Heads up!'
+        let mailBody = ''
+        
+        if (isFavProduct) {
+          // Knows exact product - give more info
+          mailSubject = ' insider info!'
+          mailBody = `Hey! I heard something big is happening at ${result.nextSpecial.locationName} next week. `
+          mailBody += `The price of ${result.nextSpecial.productName} is going ${direction}! `
+          mailBody += `I know because it's my favorite! You should look into it!`
+        } else {
+          mailBody = `Hey! I heard something big is happening at ${result.nextSpecial.locationName} next week. `
+          mailBody += `Something with prices... you might want to check it out!`
+        }
+        
+        const newMail = {
+          from: friend.name,
+          date: getMonth(month) + ' ' + year,
+          subject: mailSubject,
+          body: mailBody
+        }
+        
+        setMails(prev => [...prev, newMail])
+        console.log('MAIL RECEIVED:', newMail)
+      }
+    }
+    
+    // Reset lodge for new turn
+    setLodgeEnabled(true)
     
     // Exit travel mode and show tabs for new turn
     setTravelMode(false)
@@ -194,12 +248,31 @@ function GameScreen() {
     return () => window.removeEventListener('nextMonth', handleNextMonth)
   }, [])
   
+  // Handle grade up when player wins at the lodge
+  const handleGradeUp = () => {
+    setGrade(prev => prev + 1)
+    setLodgeEnabled(false)
+    setActiveTab('market')
+  }
+  
+  // Handle lodge completion (loss or any result goes back to market)
+  const handleLodgeComplete = () => {
+    setLodgeEnabled(false)
+    setActiveTab('market')
+  }
+  
+  // Handle delete mail
+  const handleDeleteMail = (index) => {
+    setMails(prev => prev.filter((_, i) => i !== index))
+  }
+  
   const renderTabContent = () => {
     switch (activeTab) {
       case 'market':
         return (
           <MarketTab 
             locationPrices={locationPrices}
+            locationAvailability={locationAvailability}
             inventory={inventory}
             money={money}
             onBuy={handleBuy}
@@ -217,7 +290,14 @@ function GameScreen() {
           />
         )
       case 'lodge':
-        return <LodgeTab />
+        return (
+          <LodgeTab 
+            grade={grade}
+            onGradeUp={handleGradeUp}
+            onComplete={handleLodgeComplete}
+            enabled={lodgeEnabled}
+          />
+        )
       case 'character':
         return (
           <CharacterTab 
@@ -225,6 +305,15 @@ function GameScreen() {
             playerName={playerName} 
             inventory={inventory}
             currentPlane={currentPlane}
+            grade={grade}
+            friend={friend}
+          />
+        )
+      case 'mail':
+        return (
+          <MailTab 
+            mails={mails}
+            onDeleteMail={handleDeleteMail}
           />
         )
       default:
@@ -248,7 +337,12 @@ function GameScreen() {
                 <button
                   key={tab.id}
                   className={'tab-btn ' + (activeTab === tab.id ? 'active' : '')}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => {
+                    // Disable lodge tab if not enabled
+                    if (tab.id === 'lodge' && !lodgeEnabled) return
+                    setActiveTab(tab.id)
+                  }}
+                  disabled={tab.id === 'lodge' && !lodgeEnabled}
                 >
                   {getTabLabel(tab.id)}
                 </button>
@@ -264,6 +358,7 @@ function GameScreen() {
                 fuelCost={currentPlane.fuelCost}
                 money={money}
                 onTravel={handleTravel}
+                friend={friend}
               />
             )}
           </div>

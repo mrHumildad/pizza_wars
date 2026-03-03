@@ -22,11 +22,6 @@ function MainMenu() {
         </button>
       </div>
       
-      <div className="menu-logo">
-        <h1>🍕</h1>
-        <h2>{t('pizzaWars')}</h2>
-      </div>
-      
       <div className="menu-buttons">
         <button 
           className="menu-button primary"

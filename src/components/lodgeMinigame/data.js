@@ -1,43 +1,17 @@
 export const translations = {
   en: {
-    title: "Conspiracy Hangman",
-    subtitle: "Guess the truth before it consumes you...",
-    questionLabel: "Question",
-    ofLabel: "of",
-    prevBtn: "Prev",
-    nextBtn: "Next",
-    questionLabel2: "The Question",
-    wrongLabel: "Wrong:",
-    winTitle: "✦ Revealed ✦",
-    winTextPrefix: "The truth: ",
-    loseTitle: "✖ Consumed ✖",
+    title: "Guess the truth before it consumes you...",
     loseTextPrefix: "The truth remains hidden: ",
     allRevealedTitle: "✦ All Secrets Revealed ✦",
     allRevealedText: "You have uncovered all the truths... for now.",
-    nextSecretBtn: "Next Secret",
-    continueBtn: "Continue",
-    beginAgainBtn: "Begin Again",
-    tryAgainBtn: "Try Again"
+
   },
   es: {
-    title: "Ahorcado Conspirativo",
-    subtitle: "Adivina la verdad antes de que te consuma...",
-    questionLabel: "Pregunta",
-    ofLabel: "de",
-    prevBtn: "Ant",
-    nextBtn: "Sig",
-    questionLabel2: "La Pregunta",
-    wrongLabel: "Errores:",
-    winTitle: "✦ Revelado ✦",
-    winTextPrefix: "La verdad: ",
-    loseTitle: "✖ Consumido ✦",
+    title: "Adivina la verdad antes de que te consuma...",
     loseTextPrefix: "La verdad permanece oculta: ",
     allRevealedTitle: "✦ Todos los Secretos Revelados ✦",
     allRevealedText: "Has descubierto todas las verdades... por ahora.",
-    nextSecretBtn: "Siguiente Secreto",
-    continueBtn: "Continuar",
-    beginAgainBtn: "Comenzar de Nuevo",
-    tryAgainBtn: "Intentar de Nuevo"
+
   }
 };
 

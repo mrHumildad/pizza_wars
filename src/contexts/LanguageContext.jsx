@@ -49,11 +49,15 @@ const translations = {
     // Lodge Tab
     lodgeTitle: 'Lodge',
     lodgeDesc: 'Rest and recover at the lodge.',
+    currentGrade: 'Grade',
+    gradeUp: 'Grade Up!',
+    lodgeDisabled: 'You have already used the lodge this month. Come back next month!',
     
     // Character Tab
     characterInfo: 'Character Info',
     labelName: 'Name',
     labelCharacter: 'Character',
+    labelCurrentGrade: 'Grade',
     labelCurrentPlane: 'Current Plane',
     labelTotalItems: 'Total Items',
     labelInventoryValue: 'Inventory Value',
@@ -126,11 +130,15 @@ const translations = {
     // Lodge Tab
     lodgeTitle: 'Pensión',
     lodgeDesc: 'Descansa y recupérate en la pensión.',
+    currentGrade: 'Grado',
+    gradeUp: '¡Sube de Grado!',
+    lodgeDisabled: 'Ya has usado la pensión este mes. ¡Vuelve el próximo mes!',
     
     // Character Tab
     characterInfo: 'Info del Personaje',
     labelName: 'Nombre',
     labelCharacter: 'Personaje',
+    labelCurrentGrade: 'Grado',
     labelCurrentPlane: 'Avión Actual',
     labelTotalItems: 'Total Artículos',
     labelInventoryValue: 'Valor del Inventario',

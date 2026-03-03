@@ -49,11 +49,23 @@ function NewGame() {
       alert(t('pleaseEnterName'))
       return
     }
+    
+    // Select a random NPC from the starting place's NPCs as a friend
+    const randomNpcIndex = Math.floor(Math.random() * currentPlace.npcs.length)
+    const selectedNpc = currentPlace.npcs[randomNpcIndex]
+    
+    // Add location info to the friend
+    const friendWithLocation = {
+      ...selectedNpc,
+      location: currentPlace.name
+    }
+    
     navigate('/game', { 
       state: { 
         playerName, 
         character: currentCharacter,
-        startingPlace: currentPlace 
+        startingPlace: currentPlace,
+        friend: friendWithLocation
       } 
     })
   }

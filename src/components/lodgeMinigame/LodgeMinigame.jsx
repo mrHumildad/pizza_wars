@@ -5,49 +5,43 @@ import QuestionBox from './QuestionBox';
 import AnswerDisplay from './AnswerDisplay';
 import Keyboard from './Keyboard';
 import Message from './Message';
-import QuestionNav from './QuestionNav';
 import { translations, questionsEn, questionsEs } from './data';
 import './LodgeMinigame.css';
 
 const MAX_WRONG = 6;
 
-export default function LodgeMinigame() {
+// Fisher-Yates shuffle algorithm
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+export default function LodgeMinigame({ grade, onGradeUp, onComplete, enabled }) {
   const { language } = useLanguage();
-  const [currentLang, setCurrentLang] = useState(language);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [wrongGuesses, setWrongGuesses] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [gameOver, setGameOver] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [isWin, setIsWin] = useState(false);
-
-  // Sync with app language
-  useEffect(() => {
-    setCurrentLang(language);
-  }, [language]);
-
-  const questions = currentLang === 'en' ? questionsEn : questionsEs;
-  const t = translations[currentLang];
-  const currentQuestion = questions[currentQuestionIndex];
+  
+  // Questions queue - shuffled at start and updated as questions are answered
+  const [questionsQueue, setQuestionsQueue] = useState(() => 
+    shuffleArray(language === 'en' ? questionsEn : questionsEs)
+  );
+  const [failedQuestions, setFailedQuestions] = useState([]);
+  
+  // Current question is always the first in the queue
+  const currentQuestion = questionsQueue[0];
   const currentAnswer = currentQuestion?.answer.toUpperCase() || '';
 
-  const getQuestions = useCallback(() => {
-    return currentLang === 'en' ? questionsEn : questionsEs;
-  }, [currentLang]);
+  const t = translations[language];
 
-  const resetGame = useCallback(() => {
-    setWrongGuesses(0);
-    setGuessedLetters([]);
-    setGameOver(false);
-    setShowMessage(false);
-    setIsWin(false);
-  }, []);
-
-  const handleLanguageChange = useCallback((lang) => {
-    setCurrentLang(lang);
-    setCurrentQuestionIndex(0);
-    resetGame();
-  }, [resetGame]);
+  // Check if lodge is disabled
+  const isDisabled = enabled === false;
 
   const handleGuess = useCallback((letter) => {
     if (gameOver || guessedLetters.includes(letter)) return;
@@ -78,24 +72,55 @@ export default function LodgeMinigame() {
     }
   }, [gameOver, guessedLetters, currentAnswer, wrongGuesses]);
 
-  const handleNext = useCallback(() => {
-    if (currentQuestionIndex < getQuestions().length - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
-      resetGame();
+  // Handle game completion - call appropriate callback
+  const handleGameComplete = useCallback((won) => {
+    if (won && onGradeUp) {
+      onGradeUp();
     }
-  }, [currentQuestionIndex, getQuestions, resetGame]);
-
-  const handlePrev = useCallback(() => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(prev => prev - 1);
-      resetGame();
+    if (onComplete) {
+      onComplete();
     }
-  }, [currentQuestionIndex, resetGame]);
+  }, [onGradeUp, onComplete]);
 
-  const handleRestart = useCallback(() => {
-    setCurrentQuestionIndex(0);
-    resetGame();
-  }, [resetGame]);
+  // Handle message button click
+  const handleMessageButton = () => {
+    if (isWin) {
+      // Win - remove current question from queue (don't add back)
+      const remainingQueue = questionsQueue.slice(1);
+      
+      // Check if we need to add failed questions back to queue
+      if (remainingQueue.length === 0 && failedQuestions.length > 0) {
+        // All questions answered, shuffle failed questions and continue
+        const reshuffledFailed = shuffleArray([...failedQuestions]);
+        setQuestionsQueue(reshuffledFailed);
+        setFailedQuestions([]);
+      } else {
+        setQuestionsQueue(remainingQueue);
+      }
+      
+      // Call completion handler for grade up
+      handleGameComplete(true);
+    } else {
+      // Lose - add current question to failed questions
+      if (currentQuestion) {
+        setFailedQuestions(prev => [...prev, currentQuestion]);
+      }
+      
+      // Remove current question from queue
+      const remainingQueue = questionsQueue.slice(1);
+      
+      // Check if we need to add failed questions back to queue
+      if (remainingQueue.length === 0 && failedQuestions.length > 0) {
+        const reshuffledFailed = shuffleArray([...failedQuestions]);
+        setQuestionsQueue(reshuffledFailed);
+        setFailedQuestions([]);
+      } else {
+        setQuestionsQueue(remainingQueue);
+      }
+      
+      handleGameComplete(false);
+    }
+  };
 
   // Keyboard support
   useEffect(() => {
@@ -112,51 +137,31 @@ export default function LodgeMinigame() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [gameOver, guessedLetters, handleGuess]);
 
+  // If lodge is disabled, show a message
+  if (isDisabled) {
+    return (
+      <div className="lm-container">
+        <h1 className="lm-title" data-text={t.title}>{t.title}</h1>
+        <p className="lm-subtitle">{t.lodgeDisabled || 'You have already used the lodge this month. Come back next month!'}</p>
+        <div className="lm-grade-display">
+          <span className="lm-grade-label">{t.currentGrade || 'Current Grade'}:</span>
+          <span className="lm-grade-value">{grade}</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="lm-container">
-      <div className="lm-language-toggle">
-        <button 
-          className={`lm-lang-btn ${currentLang === 'en' ? 'active' : ''}`}
-          onClick={() => handleLanguageChange('en')}
-        >
-          EN
-        </button>
-        <button 
-          className={`lm-lang-btn ${currentLang === 'es' ? 'active' : ''}`}
-          onClick={() => handleLanguageChange('es')}
-        >
-          ES
-        </button>
-      </div>
-      
-      <h1 className="lm-title" data-text={t.title}>{t.title}</h1>
-      <p className="lm-subtitle">{t.subtitle}</p>
-
-      <QuestionNav 
-        currentIndex={currentQuestionIndex} 
-        total={questions.length} 
-        t={t}
-        onPrev={handlePrev}
-        onNext={handleNext}
-      />
-
       <div className="lm-game-container">
         <div className="lm-hangman-section">
           <HangmanDrawing wrongGuesses={wrongGuesses} />
         </div>
 
         <div className="lm-game-info">
-          <QuestionBox question={currentQuestion?.question || ''} t={t} />
+          <QuestionBox question={currentQuestion?.question || ''} grade={grade} />
 
           <AnswerDisplay answer={currentAnswer} guessedLetters={guessedLetters} />
-
-          <div className="lm-status-info">
-            <div className="lm-status-item">
-              <span className="lm-status-label">{t.wrongLabel}</span>
-              <span className="lm-status-value">{wrongGuesses}</span>
-              <span className="lm-status-label">/ {MAX_WRONG}</span>
-            </div>
-          </div>
 
           <Keyboard 
             guessedLetters={guessedLetters} 
@@ -172,9 +177,9 @@ export default function LodgeMinigame() {
         isWin={isWin}
         answer={currentAnswer}
         t={t}
-        isLastQuestion={currentQuestionIndex === questions.length - 1}
-        onNext={handleNext}
-        onRestart={handleRestart}
+        onNext={handleMessageButton}
+        onRestart={handleMessageButton}
+        onComplete={handleMessageButton}
       />
     </div>
   );

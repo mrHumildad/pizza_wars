@@ -1,36 +1,38 @@
-export default function Message({ show, isWin, answer, t, isLastQuestion, onNext, onRestart }) {
+export default function Message({ show, isWin, answer, t, onComplete }) {
   if (!show) return null;
   
   const getTitle = () => {
     if (isWin) {
-      return isLastQuestion ? t.allRevealedTitle : t.winTitle;
+      return t.winTitle;
     }
     return t.loseTitle;
   };
   
   const getText = () => {
     if (isWin) {
-      return isLastQuestion ? t.allRevealedText : t.winTextPrefix + answer;
+      return t.winTextPrefix + answer;
     }
     return t.loseTextPrefix + answer;
   };
   
   const getButtonText = () => {
     if (isWin) {
-      return isLastQuestion ? t.beginAgainBtn : t.nextSecretBtn;
+      return t.continueBtn;
     }
-    return isLastQuestion ? t.tryAgainBtn : t.continueBtn;
+    return t.tryAgainBtn;
   };
   
-  const getButtonAction = () => {
-    return isLastQuestion ? onRestart : onNext;
+  const handleClick = () => {
+    if (onComplete) {
+      onComplete(isWin);
+    }
   };
-  
+
   return (
     <div className={`lm-message ${show ? 'show' : ''} ${isWin ? 'win' : 'lose'}`}>
       <h2>{getTitle()}</h2>
       <p>{getText()}</p>
-      <button className="lm-btn" onClick={getButtonAction()}>
+      <button className="lm-btn" onClick={handleClick}>
         {getButtonText()}
       </button>
     </div>

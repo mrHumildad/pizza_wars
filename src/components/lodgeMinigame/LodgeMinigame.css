@@ -57,6 +57,32 @@
   letter-spacing: 2px;
 }
 
+.lm-grade-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: rgba(139, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(139, 0, 0, 0.3);
+}
+
+.lm-grade-label {
+  font-size: 1rem;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.lm-grade-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #8b0000;
+  text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+}
+
 .lm-game-container {
   display: flex;
   gap: 25px;
@@ -226,6 +252,16 @@
   justify-content: center;
   gap: 4px;
   margin: 15px 0;
+}
+
+.lm-word {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 15px;
+}
+
+.lm-word:last-child {
+  margin-right: 0;
 }
 
 .lm-letter-box {
