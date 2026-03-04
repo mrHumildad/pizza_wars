@@ -10,3 +10,7 @@ export function getPlaceDescription(placeId, playerGrade) {
   
   return place.descriptions[descriptionIndex] || place.descriptions[0];
 }
+
+export function getLocationDescription(placeId, playerGrade) {
+  return getPlaceDescription(placeId, playerGrade);
+}

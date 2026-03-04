@@ -9,6 +9,7 @@ import HangarTab from '../components/tabs/HangarTab'
 import LodgeTab from '../components/tabs/LodgeTab'
 import CharacterTab from '../components/tabs/CharacterTab'
 import MailTab from '../components/tabs/MailTab'
+import LocationTab from '../components/tabs/LocationTab'
 import TravelMode from '../components/TravelMode'
 import { places } from '../logics/places'
 import { products } from '../logics/products'
@@ -33,6 +34,7 @@ const TABS = [
   { id: 'lodge', label: '🏠 Lodge' },
   { id: 'mail', label: '📧 Mail' },
   { id: 'character', label: '👤 Character' },
+  { id: 'location', label: '📍 Location' },
 ]
 
 // Format number with dot as thousands separator (no decimals)
@@ -81,6 +83,11 @@ function GameScreen() {
   // Player mails
   const [mails, setMails] = useState([])
   
+  // Handle location click to show location tab
+  const handleLocationClick = () => {
+    setActiveTab('location')
+  }
+  
   // Get translated tab labels
   const getTabLabel = (tabId) => {
     switch (tabId) {
@@ -88,6 +95,7 @@ function GameScreen() {
       case 'hangar': return t('tabHangar')
       case 'lodge': return t('tabLodge')
       case 'character': return t('tabCharacter')
+      case 'location': return t('tabLocation') || '📍 Location'
       default: return tabId
     }
   }
@@ -316,6 +324,13 @@ function GameScreen() {
             onDeleteMail={handleDeleteMail}
           />
         )
+      case 'location':
+        return (
+          <LocationTab 
+            locationId={currentLocationId}
+            grade={grade}
+          />
+        )
       default:
         return null
     }
@@ -326,7 +341,7 @@ function GameScreen() {
   
   return (
     <div className="game-screen">
-      <GameHUD money={formatMoney(money)} date={formattedDate} location={currentLocation} />
+      <GameHUD money={formatMoney(money)} date={formattedDate} location={currentLocation} onLocationClick={handleLocationClick} />
       
       <GameArea>
         <div className="game-layout">
