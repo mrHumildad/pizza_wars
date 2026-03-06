@@ -26,6 +26,8 @@
 .splash-logo h1 {
   font-size: 4rem;
   margin-bottom: var(--spacing-sm);
+  color: #1a1a1a;
+  text-shadow: 2px 2px 4px #000, 0 0 30px rgba(234, 183, 42, 0.3);
 }
 
 .splash-logo h2 {
@@ -33,6 +35,7 @@
   color: var(--color-accent-primary);
   letter-spacing: 4px;
   animation: pulse 1.5s ease-in-out infinite;
+  text-shadow: 0 0 15px rgba(234, 183, 42, 0.5);
 }
 
 @keyframes pulse {
@@ -48,12 +51,15 @@
 .menu-logo h1 {
   font-size: 3rem;
   margin-bottom: var(--spacing-sm);
+  color: #1a1a1a;
+  text-shadow: 2px 2px 4px #000, 0 0 20px rgba(234, 183, 42, 0.2);
 }
 
 .menu-logo h2 {
   font-size: 1.5rem;
   color: var(--color-accent-primary);
   letter-spacing: 3px;
+  text-shadow: 0 0 10px rgba(234, 183, 42, 0.4);
 }
 
 .menu-buttons {
@@ -77,26 +83,29 @@
 }
 
 .menu-button.primary {
-  background-color: var(--color-accent-primary);
-  color: var(--color-text-primary);
-  border-color: var(--color-accent-primary);
+  background: linear-gradient(180deg, #eab72a 0%, #c99f23 100%);
+  color: #0a0a0a;
+  border-color: #eab72a;
+  box-shadow: 0 0 15px rgba(234, 183, 42, 0.3), 2px 2px 5px #000;
 }
 
 .menu-button.primary:hover {
-  background-color: var(--color-accent-secondary);
-  border-color: var(--color-accent-secondary);
+  background: linear-gradient(180deg, #ffd700 0%, #eab72a 100%);
+  border-color: #ffd700;
   transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(234, 183, 42, 0.5), 2px 2px 5px #000;
 }
 
 .menu-button.secondary {
   background-color: transparent;
-  color: var(--color-text-primary);
-  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+  border: 2px solid var(--color-border);
 }
 
 .menu-button.secondary:hover {
   border-color: var(--color-accent-primary);
   color: var(--color-accent-primary);
+  box-shadow: 0 0 10px rgba(234, 183, 42, 0.2);
 }
 
 /* New Game Screen */
@@ -106,6 +115,7 @@
   margin-bottom: var(--spacing-lg);
   text-transform: uppercase;
   letter-spacing: 3px;
+  text-shadow: 0 0 15px rgba(234, 183, 42, 0.3);
 }
 
 .new-game-form {
@@ -132,7 +142,7 @@
 .form-section input {
   padding: var(--spacing-md);
   font-size: 1rem;
-  background-color: var(--color-bg-secondary);
+  background-color: #0a0a0a;
   border: 2px solid var(--color-border);
   border-radius: 8px;
   color: var(--color-text-primary);
@@ -141,6 +151,7 @@
 
 .form-section input:focus {
   border-color: var(--color-accent-primary);
+  box-shadow: 0 0 10px rgba(234, 183, 42, 0.2);
 }
 
 .form-section input::placeholder {
@@ -220,6 +231,17 @@
 .start-button {
   margin-top: var(--spacing-md);
   width: 100%;
+  background: linear-gradient(180deg, #eab72a 0%, #c99f23 100%) !important;
+  color: #0a0a0a !important;
+  border: 2px solid #eab72a !important;
+  box-shadow: 0 0 20px rgba(234, 183, 42, 0.4), 2px 2px 5px #000;
+}
+
+.start-button:hover {
+  background: linear-gradient(180deg, #ffd700 0%, #eab72a 100%) !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 30px rgba(234, 183, 42, 0.6), 2px 2px 5px #000;
+  transform: scale(1.02);
 }
 
 /* Game Screen */
@@ -229,9 +251,10 @@
   align-items: center;
   width: 100%;
   padding: var(--spacing-md);
-  background-color: var(--color-bg-secondary);
+  background: linear-gradient(180deg, #1a1a1a 0%, #111111 100%);
   border-radius: 8px;
   margin-bottom: var(--spacing-lg);
+  border: 1px solid var(--color-border);
 }
 
 .game-stat {
@@ -252,6 +275,7 @@
   font-size: 1.25rem;
   font-weight: bold;
   color: var(--color-accent-gold);
+  text-shadow: 0 0 8px rgba(234, 183, 42, 0.4);
 }
 
 .location-stat {
@@ -266,6 +290,7 @@
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(234, 183, 42, 0.4);
 }
 
 .date-value {
@@ -285,32 +310,39 @@
 .tab-nav {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
-  min-width: 100px;
+  gap: var(--spacing-sm);
+  min-width: 60px;
+  align-items: center;
 }
 
 .tab-btn {
-  padding: var(--spacing-sm) var(--spacing-md);
-  font-size: 0.75rem;
-  font-weight: bold;
-  text-align: left;
-  background-color: var(--color-bg-secondary);
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #1a1a1a 0%, #111111 100%);
   border: 2px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: 50%;
   color: var(--color-text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
+  overflow: hidden;
 }
 
 .tab-btn:hover {
   border-color: var(--color-accent-primary);
   color: var(--color-text-primary);
+  box-shadow: 0 0 10px rgba(234, 183, 42, 0.3);
 }
 
 .tab-btn.active {
-  background-color: var(--color-accent-primary);
-  border-color: var(--color-accent-primary);
-  color: var(--color-text-primary);
+  background: linear-gradient(180deg, #eab72a 0%, #c99f23 100%);
+  border-color: #eab72a;
+  color: #0a0a0a;
+  box-shadow: 0 0 15px rgba(234, 183, 42, 0.5);
 }
 
 .tab-btn:disabled {
@@ -323,15 +355,144 @@
   color: var(--color-text-secondary);
 }
 
+/* New mail indicator animation */
+.tab-btn.new-mail {
+  animation: newMailPulse 1.5s ease-in-out infinite;
+  border-color: #ff6b6b !important;
+}
+
+@keyframes newMailPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 107, 107, 0);
+  }
+}
+
+/* Mail Tab Styles - Email App Look */
+.mail-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.mail-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.mail-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.mail-item {
+  background: linear-gradient(180deg, #1a1a1a 0%, #141414 100%);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mail-item:hover {
+  background: linear-gradient(180deg, #222222 0%, #1a1a1a 100%);
+  border-color: var(--color-accent-primary);
+}
+
+.mail-item.unread {
+  border-left: 3px solid var(--color-accent-primary);
+  background: linear-gradient(180deg, #1f1a10 0%, #1a1410 100%);
+}
+
+.mail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.mail-from {
+  font-weight: bold;
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.mail-sender-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #000;
+  margin-right: var(--spacing-xs);
+}
+
+.mail-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.mail-date {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.mail-subject {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.mail-body {
+  color: var(--color-text);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.mail-delete-btn {
+  background: transparent;
+  border: 1px solid #ff4444;
+  color: #ff4444;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  margin-top: var(--spacing-xs);
+  transition: all 0.2s ease;
+}
+
+.mail-delete-btn:hover {
+  background: #ff4444;
+  color: #fff;
+}
+
 /* Tab Panel */
 .tab-panel {
   flex: 1;
-  background-color: var(--color-bg-secondary);
+  background: linear-gradient(180deg, #141414 0%, #0d0d0d 100%);
   border: 2px solid var(--color-border);
   border-radius: 8px;
   padding: var(--spacing-sm);
   text-align: left;
   overflow-y: auto;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
 .tab-content h3 {
@@ -340,6 +501,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 1rem;
+  text-shadow: 0 0 8px rgba(234, 183, 42, 0.3);
 }
 
 .tab-content p {
@@ -458,7 +620,7 @@
 }
 
 .plane-card {
-  background: var(--color-bg-secondary);
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: var(--spacing-sm);
@@ -466,7 +628,8 @@
 
 .plane-card.current {
   border-color: var(--color-accent-gold);
-  background: rgba(255, 215, 0, 0.1);
+  background: rgba(234, 183, 42, 0.1);
+  box-shadow: 0 0 15px rgba(234, 183, 42, 0.2);
 }
 
 .plane-name {
@@ -506,12 +669,13 @@
 }
 
 .owned-badge {
-  background: var(--color-accent-gold);
-  color: var(--color-bg-primary);
+  background: linear-gradient(180deg, #eab72a 0%, #c99f23 100%);
+  color: #0a0a0a;
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: 4px;
   font-weight: bold;
   font-size: 0.75rem;
+  box-shadow: 0 0 8px rgba(234, 183, 42, 0.3);
 }
 
 /* Travel Tab */
@@ -536,7 +700,7 @@
 }
 
 .destination-card {
-  background: var(--color-bg-secondary);
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: var(--spacing-sm);
@@ -545,7 +709,8 @@
 
 .destination-card.stay {
   border-color: var(--color-accent-gold);
-  background: rgba(255, 215, 0, 0.1);
+  background: rgba(234, 183, 42, 0.1);
+  box-shadow: 0 0 15px rgba(234, 183, 42, 0.2);
 }
 
 .destination-name {
@@ -571,18 +736,21 @@
 
 .travel-btn {
   width: 100%;
-  background: var(--color-accent-primary);
-  color: white;
+  background: linear-gradient(180deg, #8b0000 0%, #5a0000 100%);
+  color: #d4d4d4;
   border: none;
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
   font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .travel-btn:hover {
-  background: #2563eb;
+  background: linear-gradient(180deg, #a00000 0%, #700000 100%);
+  box-shadow: 0 0 10px rgba(139, 0, 0, 0.4);
 }
 
 .travel-btn:disabled {
@@ -612,13 +780,14 @@
 }
 
 .buy-btn {
-  background-color: var(--color-accent-success);
-  border-color: var(--color-accent-success);
-  color: var(--color-text-primary);
+  background-color: #1a3d1a;
+  border: 1px solid #2d5a2d;
+  color: #5cb85c;
 }
 
 .buy-btn:hover:not(:disabled) {
-  opacity: 0.8;
+  background-color: #2d5a2d;
+  box-shadow: 0 0 8px rgba(92, 184, 92, 0.3);
 }
 
 .buy-btn:disabled {
@@ -627,13 +796,14 @@
 }
 
 .sell-btn {
-  background-color: var(--color-accent-primary);
-  border-color: var(--color-accent-primary);
-  color: var(--color-text-primary);
+  background-color: #3d1a1a;
+  border: 1px solid #8b0000;
+  color: #cc6666;
 }
 
 .sell-btn:hover:not(:disabled) {
-  opacity: 0.8;
+  background-color: #5a2020;
+  box-shadow: 0 0 8px rgba(139, 0, 0, 0.3);
 }
 
 .sell-btn:disabled {
@@ -700,12 +870,14 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  background-color: var(--color-bg-card);
+  background: linear-gradient(180deg, #111111 0%, #0a0a0a 100%);
   border-radius: 8px;
   padding: var(--spacing-sm);
   width: 100%;
   min-height: 300px;
   overflow-y: auto;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--color-border);
 }
 
 .game-info {
@@ -730,8 +902,9 @@
   left: 0;
   right: 0;
   height: var(--footer-height);
-  background-color: var(--color-bg-secondary);
-  border-top: 1px solid var(--color-border);
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  border-top: 2px solid #2a2a2a;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(234, 183, 42, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -754,12 +927,13 @@
 .back-btn {
   background-color: transparent;
   color: var(--color-text-secondary);
-  border-color: var(--color-border);
+  border: 2px solid var(--color-border);
 }
 
 .back-btn:hover {
   border-color: var(--color-accent-primary);
   color: var(--color-accent-primary);
+  box-shadow: 0 0 10px rgba(234, 183, 42, 0.2);
 }
 
 .travel-buttons {
@@ -779,21 +953,22 @@
 }
 
 .stay-btn {
-  background-color: var(--color-accent-gold);
-  color: var(--color-bg-primary);
+  background: linear-gradient(180deg, #eab72a 0%, #c99f23 100%);
+  color: #0a0a0a;
+  box-shadow: 0 0 15px rgba(234, 183, 42, 0.3);
 }
 
 .stay-btn:hover {
-  background-color: #e6c200;
+  background: linear-gradient(180deg, #ffd700 0%, #eab72a 100%);
 }
 
 .travel-btn {
-  background-color: var(--color-accent-primary);
-  color: white;
+  background: linear-gradient(180deg, #8b0000 0%, #5a0000 100%);
+  color: #d4d4d4;
 }
 
 .travel-btn:hover {
-  background-color: #2563eb;
+  background: linear-gradient(180deg, #a00000 0%, #700000 100%);
 }
 
 .travel-btn:disabled {
@@ -928,7 +1103,7 @@
   height: 140px;
   background-size: cover;
   background-position: center;
-  background-color: #333;
+  background-color: #1a1a1a;
   border: 3px solid var(--color-border);
   border-radius: 8px;
   cursor: pointer;
@@ -943,6 +1118,7 @@
 .destination-card:hover {
   border-color: var(--color-accent-primary);
   transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(234, 183, 42, 0.2);
 }
 
 .destination-card.selected {
@@ -1176,12 +1352,14 @@
   }
   
   .tab-nav {
-    min-width: 130px;
+    min-width: 80px;
   }
   
   .tab-btn {
-    font-size: 0.9rem;
-    padding: var(--spacing-md);
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+    padding: 0;
   }
   
   .tab-content h3 {
@@ -1309,18 +1487,30 @@
   margin-bottom: var(--spacing-md);
 }
 
+.location-tab .location-main {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
 .location-tab .location-image {
-  width: 100%;
-  height: 200px;
+  width: 200px;
+  height: auto;
+  min-height: 280px;
   object-fit: cover;
   border-radius: 8px;
-  margin-bottom: var(--spacing-md);
+  flex-shrink: 0;
+}
+
+.location-tab .location-info {
+  flex: 1;
+  margin-bottom: 0;
 }
 
 .location-tab .location-description {
   font-size: 1.1rem;
   line-height: 1.6;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 }
 
 .location-tab .location-info {
@@ -1385,4 +1575,86 @@
 
 .location-value.clickable:hover {
   color: var(--color-accent-secondary);
+}
+
+/* How To Play Screen */
+.how-to-play {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-lg);
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.how-to-play-title {
+  font-size: 2rem;
+  color: var(--color-accent-primary);
+  margin-bottom: var(--spacing-lg);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.how-to-play-content {
+  width: 100%;
+  text-align: left;
+  margin-bottom: var(--spacing-xl);
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: var(--spacing-md);
+}
+
+.how-to-play-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.how-to-play-content::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
+}
+
+.how-to-play-content::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+.how-to-play-content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-primary);
+}
+
+.howto-section {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+  border-left: 3px solid var(--color-accent-primary);
+}
+
+.howto-section h2 {
+  font-size: 1.1rem;
+  color: var(--color-accent-primary);
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.howto-section p {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.howto-section ul {
+  margin: 0;
+  padding-left: var(--spacing-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+.howto-section li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.back-to-menu-btn {
+  margin-top: var(--spacing-md);
 }

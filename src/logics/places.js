@@ -12,12 +12,12 @@ export const places = [
       "The central hub of a global pedophile ring."
     ],
     npcs: [
-      { name: "Ghislaine", description: "The socialite who managed recruitment.", special: "", favProduct: "Pizza" },
-      { name: "Jeffrey", description: "The island's owner and blackmail collector.", special: "", favProduct: "Hotdog" },
-      { name: "Virginia", description: "The victim who exposed the trafficking.", special: "", favProduct: "Cheese" },
-      { name: "Les", description: "The pilot for secret client meetings.", special: "", favProduct: "Pasta" },
-      { name: "Alexander", description: "The intelligence operative running blackmail.", special: "", favProduct: "Ice cream" },
-      { name: "Andrew", description: "The royal with dark island secrets.", special: "", favProduct: "Walnut" }
+      { firstName: "Ghislaine", surname: "Maxwell", description: "The socialite who managed recruitment.", special: "", favProduct: "Pizza" },
+      { firstName: "Jeffrey", surname: "Epstein", description: "The island's owner and blackmail collector.", special: "", favProduct: "Hotdog" },
+      { firstName: "Sarah", surname: "Maxwell", description: "The recruiter coordinating island operations.", special: "", favProduct: "Cheese" },
+      { firstName: "Les", surname: "Hanley", description: "The pilot for secret client meetings.", special: "", favProduct: "Pasta" },
+      { firstName: "Alexander", surname: "daCosta", description: "The intelligence operative running blackmail.", special: "", favProduct: "Ice cream" },
+      { firstName: "Andrew", surname: "Windsor", description: "The royal with dark island secrets.", special: "", favProduct: "Walnut" }
     ],
     secretLocation: {
       name: "Underwater Temple",
@@ -45,12 +45,12 @@ export const places = [
       "Seat of an ancient bloodline's power."
     ],
     npcs: [
-      { name: "Jorge", description: "The Pope overseeing global secrets.", special: "", favProduct: "Cheese" },
-      { name: "Tarcisio", description: "The Secretary of State managing diplomacy.", special: "", favProduct: "Pasta" },
-      { name: "Luca", description: "The Swiss Guard protecting secrets.", special: "", favProduct: "Pizza" },
-      { name: "Ratzinger", description: "The former Pope pulling strings.", special: "", favProduct: "Hotdog" },
-      { name: "Loredana", description: "The archivist who knows too much.", special: "", favProduct: "Walnut" },
-      { name: "Alois", description: "The Jesuit coordinating intelligence.", special: "", favProduct: "Ice cream" }
+      { firstName: "Jorge", surname: "Bergoglio", description: "The Pope overseeing global secrets.", special: "", favProduct: "Cheese" },
+      { firstName: "Tarcisio", surname: "Bertone", description: "The Secretary of State managing diplomacy.", special: "", favProduct: "Pasta" },
+      { firstName: "Luca", surname: "Giamotti", description: "The Swiss Guard protecting secrets.", special: "", favProduct: "Pizza" },
+      { firstName: "Joseph", surname: "Ratzinger", description: "The former Pope pulling strings.", special: "", favProduct: "Hotdog" },
+      { firstName: "Angelo", surname: "Sodano", description: "The cardinal coordinating cover-ups.", special: "", favProduct: "Walnut" },
+      { firstName: "Alois", surname: "Meyer", description: "The Jesuit coordinating intelligence.", special: "", favProduct: "Ice cream" }
     ],
     secretLocation: {
       name: "Catacomb of Lost Souls",
@@ -78,12 +78,12 @@ export const places = [
       "Earthly HQ for the Zionist global conspiracy."
     ],
     npcs: [
-      { name: "Yossi", description: "A startup founder in surveillance tech.", special: "", favProduct: "Pasta" },
-      { name: "Miriam", description: "A Mossad officer recruiting assets.", special: "", favProduct: "Walnut" },
-      { name: "David", description: "A cybersecurity expert for digital warfare.", special: "", favProduct: "Ice cream" },
-      { name: "Sarah", description: "A banker moving illicit funds.", special: "", favProduct: "Hotdog" },
-      { name: "Ehud", description: "A private intelligence agency director.", special: "", favProduct: "Cheese" },
-      { name: "Benjamin", description: "The leader coordinating global ops.", special: "", favProduct: "Pizza" }
+      { firstName: "Yossi", surname: "Cohen", description: "A startup founder in surveillance tech.", special: "", favProduct: "Pasta" },
+      { firstName: "Miriam", surname: "Dagan", description: "A Mossad officer recruiting assets.", special: "", favProduct: "Walnut" },
+      { firstName: "David", surname: "Shalit", description: "A cybersecurity expert for digital warfare.", special: "", favProduct: "Ice cream" },
+      { firstName: "Sarah", surname: "Bliel", description: "A banker moving illicit funds.", special: "", favProduct: "Hotdog" },
+      { firstName: "Ehud", surname: "Barak", description: "A private intelligence agency director.", special: "", favProduct: "Cheese" },
+      { firstName: "Benjamin", surname: "Netanyhu", description: "The leader coordinating global ops.", special: "", favProduct: "Pizza" }
     ],
     secretLocation: {
       name: "Old Jaffa Tunnels",
@@ -111,12 +111,12 @@ export const places = [
       "Capital of the Reptilian hybrid bloodlines."
     ],
     npcs: [
-      { name: "Elizabeth", description: "The monarch presiding over rituals.", special: "", favProduct: "Ice cream" },
-      { name: "Rothschild", description: "The banking heir controlling markets.", special: "", favProduct: "Pizza" },
-      { name: "Winston", description: "The Five Eyes intelligence coordinator.", special: "", favProduct: "Walnut" },
-      { name: "Jacob", description: "The Freemason Grand Master.", special: "", favProduct: "Hotdog" },
-      { name: "Savile", description: "The entertainer procuring for rings.", special: "", favProduct: "Cheese" },
-      { name: "Charles", description: "The royal with the Reptilian bloodline.", special: "", favProduct: "Pasta" }
+      { firstName: "Elizabeth", surname: "Windsor", description: "The monarch presiding over rituals.", special: "", favProduct: "Ice cream" },
+      { firstName: "Mayer", surname: "Rothschild", description: "The banking heir controlling markets.", special: "", favProduct: "Pizza" },
+      { firstName: "Winston", surname: "Churchill", description: "The Five Eyes intelligence coordinator.", special: "", favProduct: "Walnut" },
+      { firstName: "Jacob", surname: "Rees", description: "The Freemason Grand Master.", special: "", favProduct: "Hotdog" },
+      { firstName: "Jimmy", surname: "Savile", description: "The entertainer procuring for rings.", special: "", favProduct: "Cheese" },
+      { firstName: "Charles", surname: "Windsor", description: "The royal with the Reptilian bloodline.", special: "", favProduct: "Pasta" }
     ],
     secretLocation: {
       name: "Sewer Network Beneath Parliament",
@@ -144,12 +144,12 @@ export const places = [
       "Location of the interdimensional stargate portal."
     ],
     npcs: [
-      { name: "Donald", description: "The real estate mogul and intelligence hub.", special: "", favProduct: "Walnut" },
-      { name: "Jeffrey", description: "The media executive controlling narratives.", special: "", favProduct: "Pasta" },
-      { name: "Michael", description: "The Wall Street market manipulator.", special: "", favProduct: "Cheese" },
-      { name: "Rudy", description: "The former mayor covering up 9/11.", special: "", favProduct: "Pizza" },
-      { name: "Epstein", description: "The financier running blackmail ops.", special: "", favProduct: "Hotdog" },
-      { name: "Rockefeller", description: "The New World Order patriarch.", special: "", favProduct: "Ice cream" }
+      { firstName: "Donald", surname: "Trump", description: "The real estate mogul and intelligence hub.", special: "", favProduct: "Walnut" },
+      { firstName: "Puff", surname: "Diddy", description: "The rapper and media mogul.", special: "", favProduct: "Pasta" },
+      { firstName: "Michael", surname: "Bloomberg", description: "The Wall Street market manipulator.", special: "", favProduct: "Cheese" },
+      { firstName: "Rudy", surname: "Giuliani", description: "The former mayor covering up 9/11.", special: "", favProduct: "Pizza" },
+      { firstName: "Allen", surname: "Weiss", description: "The financier running blackmail ops.", special: "", favProduct: "Hotdog" },
+      { firstName: "David", surname: "Rockefeller", description: "The New World Order patriarch.", special: "", favProduct: "Ice cream" }
     ],
     secretLocation: {
       name: "Abandoned Synagogue Tunnels",
@@ -177,12 +177,12 @@ export const places = [
       "The studio programming the simulation matrix."
     ],
     npcs: [
-      { name: "Harvey", description: "The producer trading roles for favors.", special: "", favProduct: "Hotdog" },
-      { name: "Steven", description: "The director with deep state ties.", special: "", favProduct: "Pizza" },
-      { name: "Oprah", description: "The media mogul controlling narratives.", special: "", favProduct: "Cheese" },
-      { name: "Madonna", description: "The pop icon involved in occult rituals.", special: "", favProduct: "Pasta" },
-      { name: "Kanye", description: "The artist with a prophetic role in the cult.", special: "", favProduct: "Ice cream" },
-      { name: "Ellen", description: "The talk show host covering up scandals.", special: "", favProduct: "Walnut" }
+      { firstName: "Harvey", surname: "Weinstein", description: "The producer trading roles for favors.", special: "", favProduct: "Hotdog" },
+      { firstName: "Steven", surname: "Spielberg", description: "The director with deep state ties.", special: "", favProduct: "Pizza" },
+      { firstName: "Oprah", surname: "Winfrey", description: "The media mogul controlling narratives.", special: "", favProduct: "Cheese" },
+      { firstName: "Madonna", surname: "Ciccone", description: "The pop icon involved in occult rituals.", special: "", favProduct: "Pasta" },
+      { firstName: "Kanye", surname: "West", description: "The artist with a prophetic role in the cult.", special: "", favProduct: "Ice cream" },
+      { firstName: "Ellen", surname: "DeGeneres", description: "The talk show host covering up scandals.", special: "", favProduct: "Walnut" }
     ],
     secretLocation: {
       name: "Subterranean Bunker Beneath Paramount Studios",

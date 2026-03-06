@@ -9,6 +9,30 @@ const translations = {
     comingSoon: 'Coming soon!',
     pizzaWars: 'PIZZA WARS',
     
+    // How To Play
+    howtoObjective: 'Objective',
+    howtoObjectiveText: 'Build your pizza empire by traveling around the world, buying and selling products at the best prices, and upgrading your plane to reach new destinations.',
+    howtoGameplay: 'How to Play',
+    howtoGameplay1: 'Start each month by choosing to travel or stay at your current location.',
+    howtoGameplay2: 'Visit the Market to buy and sell products. Prices vary by location!',
+    howtoGameplay3: 'Check the Hangar to buy better planes with more speed, range, and capacity.',
+    howtoGameplay4: 'Rest at the Lodge to recover energy and upgrade your character grade.',
+    howtoGameplay5: 'Have fun at the Clubs with various activities like pool and casino.',
+    howtoMarkets: 'Markets',
+    howtoMarketsText: 'Each location has different product prices. Buy low in cheap locations and sell high where prices are elevated. Watch the average buy price to know the fair value!',
+    howtoTravel: 'Travel',
+    howtoTravelText: 'Traveling costs money and fuel. Each plane has different fuel efficiency. Plan your routes wisely to maximize profits.',
+    howtoPlanes: 'Planes',
+    howtoPlanesText: 'Better planes cost more but let you travel faster and carry more cargo. Some exotic locations require advanced planes to reach.',
+    howtoLodge: 'Lodge',
+    howtoLodgeText: 'Rest at the lodge to restore your energy. You can also upgrade your character grade, which improves your trading skills. Each upgrade costs money.',
+    howtoClubs: 'Clubs',
+    howtoClubsText: 'Relax and have fun at local clubs. Play pool, try your luck at the casino, or sing karaoke. Some activities can earn you extra money!',
+    howtoTips: 'Tips',
+    howtoTips1: 'Always check prices at multiple markets before making big trades.',
+    howtoTips2: 'Save up for plane upgrades to access more profitable routes.',
+    howtoTips3: 'Use the Lodge regularly to maintain high energy for better trades.',
+    
     // App
     back: '← BACK',
     nextMonth: 'NEXT MONTH →',
@@ -25,6 +49,7 @@ const translations = {
     tabMarket: '🏪 Market',
     tabHangar: '🔧 Hangar',
     tabLodge: '🏠 Lodge',
+    tabClubs: '🎱 Clubs',
     tabCharacter: '👤 Character',
     
     // Market Tab
@@ -52,6 +77,17 @@ const translations = {
     currentGrade: 'Grade',
     gradeUp: 'Grade Up!',
     lodgeDisabled: 'You have already used the lodge this month. Come back next month!',
+    
+    // Clubs Tab
+    clubsTitle: 'Clubs',
+    clubsDescription: 'Visit the local clubs and enjoy various activities.',
+    clubsInfoTitle: 'Club Facilities',
+    clubsInfoText: 'Relax and have fun at the club. Different activities available!',
+    clubsActivities: 'Activities',
+    activityPool: 'Pool',
+    activityCasino: 'Casino',
+    activityBar: 'Bar',
+    activityKaraoke: 'Karaoke',
     
     // Character Tab
     characterInfo: 'Character Info',
@@ -90,6 +126,30 @@ const translations = {
     comingSoon: '¡Próximamente!',
     pizzaWars: 'PIZZA WARS',
     
+    // How To Play
+    howtoObjective: 'Objetivo',
+    howtoObjectiveText: 'Construye tu imperio de pizzas viajando por el mundo, comprando y vendiendo productos a los mejores precios, y mejorando tu avión para alcanzar nuevos destinos.',
+    howtoGameplay: 'Cómo Jugar',
+    howtoGameplay1: 'Comienza cada mes eligiendo viajar o quedarte en tu ubicación actual.',
+    howtoGameplay2: 'Visita el Mercado para comprar y vender productos. ¡Los precios varían por ubicación!',
+    howtoGameplay3: 'Revisa el Hangar para comprar mejores aviones con más velocidad, alcance y capacidad.',
+    howtoGameplay4: 'Descansa en la Pensión para recuperar energía y mejorar el grado de tu personaje.',
+    howtoGameplay5: 'Diviértete en los Clubes con varias actividades como billar y casino.',
+    howtoMarkets: 'Mercados',
+    howtoMarketsText: 'Cada ubicación tiene diferentes precios de productos. Compra barato en ubicaciones económicas y vende caro donde los precios son elevados. ¡Observa el precio promedio de compra para saber el valor justo!',
+    howtoTravel: 'Viajes',
+    howtoTravelText: 'Viajar cuesta dinero y combustible. Cada avión tiene diferente eficiencia de combustible. Planifica tus rutas sabiamente para maximizar ganancias.',
+    howtoPlanes: 'Aviones',
+    howtoPlanesText: 'Los mejores aviones cuestan más pero te permiten viajar más rápido y cargar más carga. Algunas ubicaciones exóticas requieren aviones avanzados para alcanzar.',
+    howtoLodge: 'Pensión',
+    howtoLodgeText: 'Descansa en la pensión para restaurar tu energía. También puedes mejorar el grado de tu personaje, lo cual mejora tus habilidades de trading. Cada mejora cuesta dinero.',
+    howtoClubs: 'Clubes',
+    howtoClubsText: 'Relájate y diviértete en los clubes locales. Juega billar, prueba tu suerte en el casino, o canta karaoke. ¡Algunas actividades pueden darte dinero extra!',
+    howtoTips: 'Consejos',
+    howtoTips1: 'Siempre verifica los precios en múltiples mercados antes de hacer grandes intercambios.',
+    howtoTips2: 'Ahorra para mejorar tu avión y acceder a rutas más rentables.',
+    howtoTips3: 'Usa la Pensión regularmente para mantener alta energía y mejores intercambios.',
+    
     // App
     back: '← ATRÁS',
     nextMonth: 'PRÓXIMO MES →',
@@ -106,6 +166,7 @@ const translations = {
     tabMarket: '🏪 Mercado',
     tabHangar: '🔧 Hangar',
     tabLodge: '🏠 Pensión',
+    tabClubs: '🎱 Clubes',
     tabCharacter: '👤 Personaje',
     
     // Market Tab
@@ -133,6 +194,17 @@ const translations = {
     currentGrade: 'Grado',
     gradeUp: '¡Sube de Grado!',
     lodgeDisabled: 'Ya has usado la pensión este mes. ¡Vuelve el próximo mes!',
+    
+    // Clubs Tab
+    clubsTitle: 'Clubes',
+    clubsDescription: 'Visita los clubes locales y disfruta de varias actividades.',
+    clubsInfoTitle: 'Instalaciones del Club',
+    clubsInfoText: 'Relájate y diviértete en el club. ¡Diferentes actividades disponibles!',
+    clubsActivities: 'Actividades',
+    activityPool: 'Billar',
+    activityCasino: 'Casino',
+    activityBar: 'Bar',
+    activityKaraoke: 'Karaoke',
     
     // Character Tab
     characterInfo: 'Info del Personaje',

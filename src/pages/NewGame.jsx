@@ -146,10 +146,10 @@ function NewGame() {
           </div>
         </div>
         
-        {/* Start Button 
+        {/* Start Button */}
+        <button 
           className="menu-button primary start-button"
-          */}
-        <button onClick={handleStartGame}
+          onClick={handleStartGame}
         >
           {t('startGame')}
         </button>

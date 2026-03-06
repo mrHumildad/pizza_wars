@@ -42,7 +42,7 @@ function getGradePyramid(grade) {
   return rows
 }
 
-export default function CharacterTab({ character, playerName, inventory, currentPlane, grade, friend }) {
+export default function CharacterTab({ character, playerName, inventory, currentPlane, grade, friends }) {
   const { t } = useLanguage()
   const totalItems = getTotalItems(inventory)
   const totalValue = Object.values(inventory).reduce((sum, item) => 
@@ -63,12 +63,16 @@ export default function CharacterTab({ character, playerName, inventory, current
           </>
         )}
         <hr />
-        {friend && (
+        {friends && friends.length > 0 && (
           <>
-            <p><strong>Friend:</strong> {friend.name}</p>
-            <p><strong>Location:</strong> {friend.location}</p>
-            <p><strong>Description:</strong> {friend.description}</p>
-            <p><strong>Favorite Product:</strong> {friend.favProduct}</p>
+            <p><strong>Friends ({friends.length}):</strong></p>
+            {friends.map((friend, index) => (
+              <div key={index} className="friend-info-item">
+                <p><strong>{friend.name}</strong> - {friend.location}</p>
+                <p><em>{friend.description}</em></p>
+                <p><strong>Favorite Product:</strong> {friend.favProduct}</p>
+              </div>
+            ))}
             <hr />
           </>
         )}

@@ -1,4 +1,4 @@
-/* Lodge Minigame Styles */
+/* Lodge Minigame Styles - Sinister Edition */
 .lm-container {
   position: relative;
   width: 100%;
@@ -7,6 +7,8 @@
   padding: 15px;
   font-family: 'Courier New', Courier, monospace;
   color: #8b0000;
+  background: radial-gradient(ellipse at center, #1a0a0a 0%, #0a0505 100%);
+  border-radius: 10px;
 }
 
 .lm-language-toggle {
@@ -21,8 +23,8 @@
 .lm-lang-btn {
   padding: 6px 12px;
   background: transparent;
-  border: 1px solid #3d0000;
-  color: #666;
+  border: 1px solid #2a0a0a;
+  color: #555;
   cursor: pointer;
   font-family: 'Courier New', monospace;
   text-transform: uppercase;
@@ -33,8 +35,8 @@
 
 .lm-lang-btn:hover, .lm-lang-btn.active {
   background: #8b0000;
-  color: #0a0a0a;
-  box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+  color: #eab72a;
+  box-shadow: 0 0 10px rgba(139, 0, 0, 0.5), 0 0 5px rgba(234, 183, 42, 0.3);
 }
 
 .lm-title {
@@ -67,6 +69,7 @@
   background: rgba(139, 0, 0, 0.1);
   border-radius: 8px;
   border: 1px solid rgba(139, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(139, 0, 0, 0.2);
 }
 
 .lm-grade-label {
@@ -323,8 +326,8 @@
 
 .lm-key:hover:not(:disabled) {
   background: #8b0000;
-  color: #0a0a0a;
-  box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+  color: #eab72a;
+  box-shadow: 0 0 10px rgba(139, 0, 0, 0.5), 0 0 5px rgba(234, 183, 42, 0.3);
   transform: scale(1.05);
 }
 
@@ -410,6 +413,7 @@
 
 .lm-message.lose h2 {
   color: #8b0000;
+  text-shadow: 0 0 15px rgba(139, 0, 0, 0.5);
 }
 
 .lm-message p {
@@ -437,8 +441,8 @@
 
 .lm-btn:hover {
   background: #8b0000;
-  color: #0a0a0a;
-  box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+  color: #eab72a;
+  box-shadow: 0 0 20px rgba(139, 0, 0, 0.5), 0 0 10px rgba(234, 183, 42, 0.3);
 }
 
 .lm-question-nav {

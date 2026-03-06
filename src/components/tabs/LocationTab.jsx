@@ -12,22 +12,25 @@ function LocationTab({ locationId, grade }) {
   return (
     <div className="tab-content location-tab">
       <h2 className="location-title">{place.name}</h2>
-      <img 
-        src={place.image} 
-        alt={place.name}
-        className="location-image"
-      />
-      <p className="location-description">{description}</p>
       
-      <div className="location-info">
-        <h3>Secret Location</h3>
-        <p><strong>{place.secretLocation?.name}:</strong> {place.secretLocation?.description}</p>
-        
-        <h3>Party Location</h3>
-        <p><strong>{place.partyLocation?.name}:</strong> {place.partyLocation?.description}</p>
-        
-        <h3>Harvest Location</h3>
-        <p><strong>{place.harvestLocation?.name}:</strong> {place.harvestLocation?.description}</p>
+      <div className="location-main">
+        <img 
+          src={place.image} 
+          alt={place.name}
+          className="location-image"
+        />
+        <div className="location-info">
+          <p className="location-description">{description}</p>
+          
+          <h3>Secret Location</h3>
+          <p><strong>{place.secretLocation?.name}:</strong> {place.secretLocation?.description}</p>
+          
+          <h3>Party Location</h3>
+          <p><strong>{place.partyLocation?.name}:</strong> {place.partyLocation?.description}</p>
+          
+          <h3>Harvest Location</h3>
+          <p><strong>{place.harvestLocation?.name}:</strong> {place.harvestLocation?.description}</p>
+        </div>
       </div>
       
       <div className="location-npcs">
@@ -35,7 +38,7 @@ function LocationTab({ locationId, grade }) {
         <div className="npc-grid">
           {place.npcs?.map((npc, index) => (
             <div key={index} className="npc-card">
-              <span className="npc-name">{npc.name}</span>
+              <span className="npc-name">{npc.firstName} {npc.surname}</span>
               <span className="npc-desc">{npc.description}</span>
               <span className="npc-fav">Fav: {npc.favProduct}</span>
             </div>

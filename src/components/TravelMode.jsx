@@ -17,7 +17,7 @@ export default function TravelMode({
   fuelCost, 
   money, 
   onTravel,
-  friend 
+  friends 
 }) {
   const { t } = useLanguage()
   const currentPlace = places.find(p => p.id === currentPlaceId)
@@ -33,12 +33,16 @@ export default function TravelMode({
     'Walnut': '🥜'
   }
   
-  // Get friend's favourite icon for a location
-  const getFriendFavIcon = (placeName) => {
-    if (friend && friend.location === placeName && friend.favProduct) {
-      return productIcons[friend.favProduct] || null
-    }
-    return null
+  // Get all friends' favourite icons for a location
+  const getFriendsFavIcons = (placeName) => {
+    if (!friends || friends.length === 0) return []
+    return friends
+      .filter(friend => friend.location === placeName && friend.favProduct)
+      .map(friend => ({
+        icon: productIcons[friend.favProduct] || null,
+        name: friend.name
+      }))
+      .filter(item => item.icon)
   }
   
   return (
@@ -52,9 +56,9 @@ export default function TravelMode({
         >
           <div className="destination-overlay"></div>
           <div className="destination-name">{currentPlace?.name}</div>
-          {getFriendFavIcon(currentPlace?.name) && (
-            <div className="friend-fav-icon">{getFriendFavIcon(currentPlace?.name)}</div>
-          )}
+          {getFriendsFavIcons(currentPlace?.name).map((item, index) => (
+            <div key={index} className="friend-fav-icon" title={item.name}>{item.icon}</div>
+          ))}
           <div className="destination-details">{t('stayThisMonth')}</div>
           <div className="destination-price free">{t('free')}</div>
         </button>
@@ -62,7 +66,7 @@ export default function TravelMode({
         {/* Other 5 places - travel and advance month */}
         {availablePlaces.map((place) => {
           const canAfford = money >= fuelCost
-          const friendIcon = getFriendFavIcon(place.name)
+          const friendIcons = getFriendsFavIcons(place.name)
           
           return (
             <button 
@@ -74,9 +78,9 @@ export default function TravelMode({
             >
               <div className="destination-overlay"></div>
               <div className="destination-name">{place.name}</div>
-              {friendIcon && (
-                <div className="friend-fav-icon">{friendIcon}</div>
-              )}
+              {friendIcons.map((item, index) => (
+                <div key={index} className="friend-fav-icon" title={item.name}>{item.icon}</div>
+              ))}
               <div className="destination-price">{formatMoney(fuelCost)}</div>
             </button>
           )

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useLanguage } from '../contexts/LanguageContext'
-import GameHUD from '../components/GameHUD'
+import { useGameHeader } from '../contexts/GameHeaderContext'
 import GameArea from '../components/GameArea'
 import GameFooter from '../components/GameFooter'
 import MarketTab from '../components/tabs/MarketTab'
@@ -10,6 +10,7 @@ import LodgeTab from '../components/tabs/LodgeTab'
 import CharacterTab from '../components/tabs/CharacterTab'
 import MailTab from '../components/tabs/MailTab'
 import LocationTab from '../components/tabs/LocationTab'
+import ClubsTab from '../components/tabs/ClubsTab'
 import TravelMode from '../components/TravelMode'
 import { places } from '../logics/places'
 import { products } from '../logics/products'
@@ -24,17 +25,20 @@ import {
   updateInventorySell
 } from '../gameMechanics'
 
+const SAVE_KEY = 'pizzaWarsSave'
+
 const INITIAL_MONEY = 666
 const START_MONTH = 3 // April (0-indexed: 0=Jan, 3=April)
 const START_YEAR = 2026
 
 const TABS = [
-  { id: 'market', label: '🏪 Market' },
-  { id: 'hangar', label: '🔧 Hangar' },
-  { id: 'lodge', label: '🏠 Lodge' },
-  { id: 'mail', label: '📧 Mail' },
-  { id: 'character', label: '👤 Character' },
-  { id: 'location', label: '📍 Location' },
+  { id: 'character', label: '👤' },
+  { id: 'market', label: '🏪' },
+  { id: 'hangar', label: '🔧' },
+  { id: 'lodge', label: '🏠' },
+  { id: 'clubs', label: '🎱' },
+  { id: 'mail', label: '📧' },
+  { id: 'location', label: '📍' },
 ]
 
 // Format number with dot as thousands separator (no decimals)
@@ -51,6 +55,7 @@ function formatMoney(money) {
 function GameScreen() {
   const location = useLocation()
   const { t, getMonth } = useLanguage()
+  const { setGameHeaderInfo } = useGameHeader()
   
   // Get game config from navigation state
   const gameConfig = location.state || {}
@@ -67,7 +72,7 @@ function GameScreen() {
   const [currentLocation, setCurrentLocation] = useState(startingPlace?.name || 'Unknown')
   const [currentLocationId, setCurrentLocationId] = useState(initialLocationId)
   const [currentPlane, setCurrentPlane] = useState(cheapestPlane)
-  const [activeTab, setActiveTab] = useState('market')
+  const [activeTab, setActiveTab] = useState('location')
   const [locationPrices, setLocationPrices] = useState({})
   const [locationAvailability, setLocationAvailability] = useState({})
   const [inventory, setInventory] = useState({})
@@ -78,10 +83,95 @@ function GameScreen() {
   const [grade, setGrade] = useState(1)
   // Lodge is disabled after use until next turn/month
   const [lodgeEnabled, setLodgeEnabled] = useState(true)
+  // Clubs is disabled after use until next turn/month
+  const [clubsEnabled, setClubsEnabled] = useState(true)
   // Previous turn's special (applied to current prices)
   const [previousSpecial, setPreviousSpecial] = useState(null)
   // Player mails
   const [mails, setMails] = useState([])
+  // Track if there's new mail for the current turn (animates the mail tab button)
+  const [hasNewMail, setHasNewMail] = useState(false)
+  // Friends list - starts with the initial friend from new game
+  const [friends, setFriends] = useState(() => friend ? [friend] : [])
+  
+  // Function to save game state to localStorage
+  const saveGame = () => {
+    const gameState = {
+      money,
+      month,
+      year,
+      currentLocation,
+      currentLocationId,
+      currentPlane,
+      locationPrices,
+      locationAvailability,
+      inventory,
+      grade,
+      lodgeEnabled,
+      clubsEnabled,
+      previousSpecial,
+      mails,
+      friends,
+      // Also save the game config (playerName, character, startingPlace, friend)
+      playerName,
+      character,
+      startingPlace,
+      friend
+    }
+    localStorage.setItem(SAVE_KEY, JSON.stringify(gameState))
+    console.log('Game saved!')
+  }
+  
+  // Function to load game state from localStorage
+  const loadGame = () => {
+    const saved = localStorage.getItem(SAVE_KEY)
+    if (saved) {
+      try {
+        const gameState = JSON.parse(saved)
+        setMoney(gameState.money)
+        setMonth(gameState.month)
+        setYear(gameState.year)
+        setCurrentLocation(gameState.currentLocation)
+        setCurrentLocationId(gameState.currentLocationId)
+        setCurrentPlane(gameState.currentPlane)
+        setLocationPrices(gameState.locationPrices)
+        setLocationAvailability(gameState.locationAvailability)
+        setInventory(gameState.inventory)
+        setGrade(gameState.grade)
+        setLodgeEnabled(gameState.lodgeEnabled)
+        setClubsEnabled(gameState.clubsEnabled)
+        setPreviousSpecial(gameState.previousSpecial)
+        setMails(gameState.mails || [])
+        setFriends(gameState.friends || [])
+        console.log('Game loaded!')
+        return true
+      } catch (e) {
+        console.error('Failed to load game:', e)
+        return false
+      }
+    }
+    return false
+  }
+  
+  // Try to load saved game on mount
+  useEffect(() => {
+    const loaded = loadGame()
+    if (!loaded) {
+      // Only initialize prices if not loading a saved game
+      const result = generateLocationPrices(places, products, friend)
+      setLocationPrices(result.prices)
+      setLocationAvailability(result.availability)
+      setInventory(initializeInventory(products))
+    }
+  }, []) // Empty dependency array - only run on mount
+  
+  // Auto-save game state when key game data changes
+  useEffect(() => {
+    // Only save if we have meaningful data (not initial empty state)
+    if (money !== INITIAL_MONEY || Object.keys(locationPrices).length > 0) {
+      saveGame()
+    }
+  }, [money, month, year, currentLocation, currentLocationId, currentPlane, locationPrices, locationAvailability, inventory, grade, lodgeEnabled, clubsEnabled, previousSpecial, mails, friends])
   
   // Handle location click to show location tab
   const handleLocationClick = () => {
@@ -94,22 +184,25 @@ function GameScreen() {
       case 'market': return t('tabMarket')
       case 'hangar': return t('tabHangar')
       case 'lodge': return t('tabLodge')
+      case 'clubs': return t('tabClubs')
       case 'character': return t('tabCharacter')
       case 'location': return t('tabLocation') || '📍 Location'
       default: return tabId
     }
   }
   
-  // Initialize prices and inventory on mount (Turn 1 - no special)
-  useEffect(() => {
-    const result = generateLocationPrices(places, products, friend)
-    setLocationPrices(result.prices)
-    setLocationAvailability(result.availability)
-    setInventory(initializeInventory(products))
-  }, [])
-  
   // Format date for display
   const formattedDate = getMonth(month) + ' ' + year
+  
+  // Update header info when game state changes
+  useEffect(() => {
+    setGameHeaderInfo({
+      money: formatMoney(money),
+      location: currentLocation,
+      date: formattedDate
+    })
+    return () => setGameHeaderInfo(null)
+  }, [money, currentLocation, formattedDate, setGameHeaderInfo])
   
   // Handle buy item
   const handleBuy = (productId, quantity, price) => {
@@ -212,16 +305,19 @@ function GameScreen() {
           from: friend.name,
           date: getMonth(month) + ' ' + year,
           subject: mailSubject,
-          body: mailBody
+          body: mailBody,
+          turn: month + '-' + year // Track which turn this mail was received
         }
         
         setMails(prev => [...prev, newMail])
+        setHasNewMail(true) // Mark that there's new mail for the animation
         console.log('MAIL RECEIVED:', newMail)
       }
     }
     
     // Reset lodge for new turn
     setLodgeEnabled(true)
+    setClubsEnabled(true)
     
     // Exit travel mode and show tabs for new turn
     setTravelMode(false)
@@ -260,18 +356,29 @@ function GameScreen() {
   const handleGradeUp = () => {
     setGrade(prev => prev + 1)
     setLodgeEnabled(false)
-    setActiveTab('market')
+    setActiveTab('location')
   }
   
   // Handle lodge completion (loss or any result goes back to market)
   const handleLodgeComplete = () => {
     setLodgeEnabled(false)
-    setActiveTab('market')
+    setActiveTab('location')
+  }
+  
+  // Handle clubs completion (return to market)
+  const handleClubsComplete = () => {
+    setClubsEnabled(false)
+    setActiveTab('location')
   }
   
   // Handle delete mail
   const handleDeleteMail = (index) => {
     setMails(prev => prev.filter((_, i) => i !== index))
+  }
+  
+  // Handle adding a new friend
+  const handleAddFriend = (newFriend) => {
+    setFriends(prev => [...prev, newFriend])
   }
   
   const renderTabContent = () => {
@@ -306,6 +413,16 @@ function GameScreen() {
             enabled={lodgeEnabled}
           />
         )
+      case 'clubs':
+        return (
+          <ClubsTab 
+            locationId={currentLocationId}
+            friends={friends}
+            onAddFriend={handleAddFriend}
+            enabled={clubsEnabled}
+            onComplete={handleClubsComplete}
+          />
+        )
       case 'character':
         return (
           <CharacterTab 
@@ -314,7 +431,7 @@ function GameScreen() {
             inventory={inventory}
             currentPlane={currentPlane}
             grade={grade}
-            friend={friend}
+            friends={friends}
           />
         )
       case 'mail':
@@ -341,7 +458,6 @@ function GameScreen() {
   
   return (
     <div className="game-screen">
-      <GameHUD money={formatMoney(money)} date={formattedDate} location={currentLocation} onLocationClick={handleLocationClick} />
       
       <GameArea>
         <div className="game-layout">
@@ -351,15 +467,24 @@ function GameScreen() {
               {TABS.map((tab) => (
                 <button
                   key={tab.id}
-                  className={'tab-btn ' + (activeTab === tab.id ? 'active' : '')}
+                  className={'tab-btn ' + (activeTab === tab.id ? 'active' : '') + (tab.id === 'mail' && hasNewMail ? ' new-mail' : '')}
                   onClick={() => {
-                    // Disable lodge tab if not enabled
-                    if (tab.id === 'lodge' && !lodgeEnabled) return
+                    // Disable lodge and clubs tabs if not enabled
+                    if ((tab.id === 'lodge' && !lodgeEnabled) || (tab.id === 'clubs' && !clubsEnabled)) return
                     setActiveTab(tab.id)
+                    // Clear new mail flag when user opens mail tab
+                    if (tab.id === 'mail') {
+                      setHasNewMail(false)
+                    }
                   }}
-                  disabled={tab.id === 'lodge' && !lodgeEnabled}
+                  disabled={(tab.id === 'lodge' && !lodgeEnabled) || (tab.id === 'clubs' && !clubsEnabled)}
+                  title={getTabLabel(tab.id)}
                 >
-                  {getTabLabel(tab.id)}
+                  {tab.id === 'character' && character ? (
+                    <img src={character.image} alt="character" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                  ) : (
+                    tab.label
+                  )}
                 </button>
               ))}
             </div>
@@ -373,7 +498,7 @@ function GameScreen() {
                 fuelCost={currentPlane.fuelCost}
                 money={money}
                 onTravel={handleTravel}
-                friend={friend}
+                friends={friends}
               />
             )}
           </div>

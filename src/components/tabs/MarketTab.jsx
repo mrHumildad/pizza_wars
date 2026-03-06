@@ -52,8 +52,8 @@ export default function MarketTab({
         <span>{t('colItem')}</span>
         <span>{t('colOwned')}</span>
         <span>{t('colPrice')}</span>
-        <span>{t('colAvgBuy')}</span>
         <span>{t('colAction')}</span>
+        <span>{t('colAvgBuy')}</span>
       </div>
       
       {products.filter(product => availableProductIds.includes(product.id)).map((product) => {
@@ -73,49 +73,31 @@ export default function MarketTab({
             <span className="item-name">{productIcons[product.name] || product.name}</span>
             <span className="item-owned">{owned}</span>
             <span className={`item-price ${priceClass}`}>{formatMoney(price)}</span>
-            <span className="item-avg">{avgBuyPrice > 0 ? formatMoney(avgBuyPrice) : '-'}</span>
             <div className="item-actions">
               <div className="action-group">
-                <input 
-                  type="number" 
-                  min="1" 
-                  max={maxBuy} 
-                  defaultValue="1"
-                  className="quantity-input"
-                  id={'buy-' + product.id}
-                />
                 <button 
                   className="action-btn buy-btn"
                   disabled={maxBuy === 0}
                   onClick={() => {
-                    const qty = parseInt(document.getElementById('buy-' + product.id).value) || 1
-                    onBuy(product.id, qty, price)
+                    onBuy(product.id, 1, price)
                   }}
                 >
                   {t('btnBuy')}
                 </button>
               </div>
               <div className="action-group">
-                <input 
-                  type="number" 
-                  min="1" 
-                  max={owned} 
-                  defaultValue="1"
-                  className="quantity-input"
-                  id={'sell-' + product.id}
-                />
                 <button 
                   className="action-btn sell-btn"
                   disabled={owned === 0}
                   onClick={() => {
-                    const qty = parseInt(document.getElementById('sell-' + product.id).value) || 1
-                    onSell(product.id, qty, price)
+                    onSell(product.id, 1, price)
                   }}
                 >
                   {t('btnSell')}
                 </button>
               </div>
             </div>
+            <span className="item-avg">{avgBuyPrice > 0 ? formatMoney(avgBuyPrice) : '-'}</span>
           </div>
         )
       })}

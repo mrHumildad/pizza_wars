@@ -1,0 +1,220 @@
+.blackjack-container {
+  padding: 10px;
+  text-align: center;
+  background: radial-gradient(ellipse at center, #141414 0%, #0a0a0a 100%);
+  min-height: 100%;
+}
+
+.blackjack-title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #eab72a;
+  text-shadow: 2px 2px 4px #000, 0 0 20px rgba(234, 183, 42, 0.3);
+  letter-spacing: 3px;
+}
+
+.opponent-name {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #888;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  border: 1px solid #2a2a2a;
+}
+
+.round-info {
+  color: #eab72a;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(234, 183, 42, 0.3);
+}
+
+.series-score {
+  color: #888;
+}
+
+.result-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.result-panel h2 {
+  font-size: 1.8rem;
+  color: #eab72a;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(234, 183, 42, 0.4);
+}
+
+.dealer-section,
+.player-section {
+  margin: 10px 0;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.dealer-section h3,
+.player-section h3 {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  color: #666;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  min-height: 60px;
+  align-items: center;
+}
+
+.card {
+  width: 45px;
+  height: 65px;
+  background: white;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.card.red {
+  color: #e74c3c;
+}
+
+.card.black {
+  color: #2c3e50;
+}
+
+.card-value {
+  font-size: 1rem;
+}
+
+.card-suit {
+  font-size: 1.1rem;
+  position: absolute;
+  bottom: 3px;
+}
+
+.card-back {
+  width: 45px;
+  height: 65px;
+  background: linear-gradient(135deg, #0d0d0d 25%, #1a1a1a 25%, #1a1a1a 50%, #0d0d0d 50%, #0d0d0d 75%, #1a1a1a 75%);
+  background-size: 10px 10px;
+  border-radius: 6px;
+  border: 2px solid #eab72a;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), 0 0 10px rgba(234, 183, 42, 0.2);
+}
+
+.score {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  color: #eab72a;
+  text-shadow: 0 0 8px rgba(234, 183, 42, 0.3);
+}
+
+.message-section {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-message {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #d4d4d4;
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.bj-btn {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.bj-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.bj-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bj-hit {
+  background: linear-gradient(180deg, #1a3d1a 0%, #0d250d 100%);
+  color: #5cb85c;
+  border: 1px solid #2d5a2d;
+}
+
+.bj-hit:hover:not(:disabled) {
+  background: linear-gradient(180deg, #2d5a2d 0%, #1a3d1a 100%);
+  box-shadow: 0 0 10px rgba(92, 184, 92, 0.3);
+}
+
+.bj-stand {
+  background: linear-gradient(180deg, #3d1a1a 0%, #250d0d 100%);
+  color: #cc6666;
+  border: 1px solid #5a2020;
+}
+
+.bj-stand:hover:not(:disabled) {
+  background: linear-gradient(180deg, #5a2020 0%, #3d1a1a 100%);
+  box-shadow: 0 0 10px rgba(139, 0, 0, 0.3);
+}
+
+.bj-new {
+  background: linear-gradient(180deg, #1a1a3d 0%, #0d0d25 100%);
+  color: #6666cc;
+  border: 1px solid #20205a;
+}
+
+.bj-new:hover:not(:disabled) {
+  background: linear-gradient(180deg, #20205a 0%, #1a1a3d 100%);
+  box-shadow: 0 0 10px rgba(102, 102, 204, 0.3);
+}
