@@ -155,15 +155,28 @@ function GameScreen() {
   
   // Try to load saved game on mount
   useEffect(() => {
-    const loaded = loadGame()
-    if (!loaded) {
-      // Only initialize prices if not loading a saved game
+    // Check if this is a new game (has playerName in navigation state)
+    const isNewGame = !!playerName
+    
+    if (isNewGame) {
+      // This is a new game - clear any old save and initialize fresh
+      localStorage.removeItem(SAVE_KEY)
       const result = generateLocationPrices(places, products, friend)
       setLocationPrices(result.prices)
       setLocationAvailability(result.availability)
       setInventory(initializeInventory(products))
+    } else {
+      // Try to load saved game from localStorage
+      const loaded = loadGame()
+      if (!loaded) {
+        // No save found - initialize with default values
+        const result = generateLocationPrices(places, products, friend)
+        setLocationPrices(result.prices)
+        setLocationAvailability(result.availability)
+        setInventory(initializeInventory(products))
+      }
     }
-  }, []) // Empty dependency array - only run on mount
+  }, [playerName]) // Run when playerName changes
   
   // Auto-save game state when key game data changes
   useEffect(() => {
@@ -302,7 +315,7 @@ function GameScreen() {
         }
         
         const newMail = {
-          from: friend.name,
+          from: friend.firstName || 'Unknown',
           date: getMonth(month) + ' ' + year,
           subject: mailSubject,
           body: mailBody,
@@ -407,6 +420,7 @@ function GameScreen() {
       case 'lodge':
         return (
           <LodgeTab 
+            key={`lodge-${month}-${year}`}
             grade={grade}
             onGradeUp={handleGradeUp}
             onComplete={handleLodgeComplete}
@@ -416,6 +430,7 @@ function GameScreen() {
       case 'clubs':
         return (
           <ClubsTab 
+            key={`clubs-${month}-${year}`}
             locationId={currentLocationId}
             friends={friends}
             onAddFriend={handleAddFriend}

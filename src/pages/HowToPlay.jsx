@@ -52,11 +52,22 @@ function HowToPlay() {
         </section>
 
         <section className="howto-section">
+          <h2>{t('howtoFriends')}</h2>
+          <p>{t('howtoFriendsText')}</p>
+        </section>
+
+        <section className="howto-section">
+          <h2>{t('howtoMail')}</h2>
+          <p>{t('howtoMailText')}</p>
+        </section>
+
+        <section className="howto-section">
           <h2>{t('howtoTips')}</h2>
           <ul>
             <li>{t('howtoTips1')}</li>
             <li>{t('howtoTips2')}</li>
             <li>{t('howtoTips3')}</li>
+            <li>{t('howtoTips4')}</li>
           </ul>
         </section>
       </div>

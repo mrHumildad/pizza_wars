@@ -1,6 +1,7 @@
 export default function MailTab({ mails, onDeleteMail }) {
   // Get initials from sender name
   const getInitials = (name) => {
+    if (!name) return '??'
     return name
       .split(' ')
       .map(n => n[0])

@@ -68,7 +68,7 @@ export default function CharacterTab({ character, playerName, inventory, current
             <p><strong>Friends ({friends.length}):</strong></p>
             {friends.map((friend, index) => (
               <div key={index} className="friend-info-item">
-                <p><strong>{friend.name}</strong> - {friend.location}</p>
+                <p><strong>{friend.firstName || friend.name || 'Unknown'}</strong> - {friend.location}</p>
                 <p><em>{friend.description}</em></p>
                 <p><strong>Favorite Product:</strong> {friend.favProduct}</p>
               </div>

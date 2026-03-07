@@ -19,6 +19,7 @@ export default function TravelMode({
   onTravel,
   friends 
 }) {
+  console.log('TravelMode friends:', friends)
   const { t } = useLanguage()
   const currentPlace = places.find(p => p.id === currentPlaceId)
   const availablePlaces = places.filter(p => p.id !== currentPlaceId)
@@ -40,7 +41,7 @@ export default function TravelMode({
       .filter(friend => friend.location === placeName && friend.favProduct)
       .map(friend => ({
         icon: productIcons[friend.favProduct] || null,
-        name: friend.name
+        name: friend.firstName || friend.name
       }))
       .filter(item => item.icon)
   }

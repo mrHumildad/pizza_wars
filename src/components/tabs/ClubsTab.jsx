@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { useLanguage } from '../../contexts/LanguageContext'
 import Blackjack from './Blackjack'
 import { places } from '../../logics/places'
@@ -6,7 +6,6 @@ import './ClubsTab.css'
 
 function ClubsTab({ locationId, friends, onAddFriend, enabled, onComplete }) {
   const { language } = useLanguage()
-  const [opponent, setOpponent] = useState(null)
   const [showBlackjack, setShowBlackjack] = useState(false)
   const [currentOpponent, setCurrentOpponent] = useState(null)
   
@@ -15,7 +14,7 @@ function ClubsTab({ locationId, friends, onAddFriend, enabled, onComplete }) {
   
   // Get friend names for filtering
   const friendNames = useMemo(() => {
-    return friends?.map(f => f.name) || []
+    return friends?.map(f => f.firstName ? `${f.firstName} ${f.surname || ''}`.trim() : f.name) || []
   }, [friends])
   
   // Get available NPCs (not friends)
@@ -24,24 +23,27 @@ function ClubsTab({ locationId, friends, onAddFriend, enabled, onComplete }) {
     return currentPlace.npcs.filter(npc => !friendNames.includes(npc.firstName + ' ' + npc.surname))
   }, [currentPlace, friendNames])
   
-  // Select random opponent on mount and when available NPCs change
-  useEffect(() => {
+  // Select random opponent - initialize with function to run only once
+  const getInitialOpponent = () => {
     if (availableNpcs.length > 0 && enabled) {
       const randomIndex = Math.floor(Math.random() * availableNpcs.length)
-      setOpponent(availableNpcs[randomIndex])
-    } else {
-      setOpponent(null)
+      return availableNpcs[randomIndex]
     }
-  }, [availableNpcs, enabled])
+    return null
+  }
+  
+  const [opponent] = useState(getInitialOpponent)
 
   const handleBlackjackWin = () => {
     // Add opponent to friends
-    if (currentOpponent && onAddFriend) {
-      // Convert NPC (firstName/surname) to friend (name)
+    if (opponent && onAddFriend) {
+      // Convert NPC (firstName/surname) to friend (name) - include location from current place
       const friend = {
-        ...currentOpponent,
-        name: `${currentOpponent.firstName} ${currentOpponent.surname}`
+        ...opponent,
+        name: `${opponent.firstName} ${opponent.surname}`,
+        location: currentPlace.name
       }
+      console.log('Adding friend from ClubsTab:', friend)
       onAddFriend(friend)
     }
     // Return to market (handled by parent)

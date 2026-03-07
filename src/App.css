@@ -516,7 +516,7 @@
 
 .market-header {
   display: grid;
-  grid-template-columns: 100px 60px 80px 80px 1fr;
+  grid-template-columns: 100px 60px 80px 100px 1fr;
   gap: var(--spacing-xs);
   padding: var(--spacing-xs);
   font-size: 0.65rem;
@@ -528,7 +528,7 @@
 
 .market-row {
   display: grid;
-  grid-template-columns: 100px 60px 80px 80px 1fr;
+  grid-template-columns: 100px 60px 80px 100px 1fr;
   gap: var(--spacing-xs);
   padding: var(--spacing-xs);
   align-items: center;
