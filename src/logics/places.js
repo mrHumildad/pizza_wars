@@ -2,7 +2,7 @@ export const places = [
   {
     id: 1,
     name: "Little Saint James Island",
-    image: "/images/places/stjames.jpg",
+    image: "./images/places/stjames.jpg",
     descriptions: [
       "A pristine private Caribbean island paradise.",
       "An exclusive retreat for the world's elite.",
@@ -35,7 +35,7 @@ export const places = [
   {
     id: 2,
     name: "Vatican City",
-    image: "/images/places/vatican.jpg",
+    image: "./images/places/vatican.jpg",
     descriptions: [
       "The spiritual heart of Catholicism.",
       "A sovereign city-state with priceless treasures.",
@@ -68,7 +68,7 @@ export const places = [
   {
     id: 3,
     name: "Tel Aviv",
-    image: "/images/places/tell.jpg",
+    image: "./images/places/tell.jpg",
     descriptions: [
       "A vibrant Mediterranean city with beaches.",
       "Israel's financial and technological hub.",
@@ -101,7 +101,7 @@ export const places = [
   {
     id: 4,
     name: "London",
-    image: "/images/places/london.jpg",
+    image: "./images/places/london.jpg",
     descriptions: [
       "The historic UK capital with the Royal Family.",
       "A global financial and corporate hub.",
@@ -134,7 +134,7 @@ export const places = [
   {
     id: 5,
     name: "New York City",
-    image: "/images/places/ny.jpg",
+    image: "./images/places/ny.jpg",
     descriptions: [
       "The city that never sleeps, a cultural melting pot.",
       "Home to Wall Street and the United Nations.",
@@ -167,7 +167,7 @@ export const places = [
   {
     id: 6,
     name: "Hollywood",
-    image: "/images/places/hollywood.jpg",
+    image: "./images/places/hollywood.jpg",
     descriptions: [
       "The entertainment capital of the world.",
       "A global cultural influence powerhouse.",

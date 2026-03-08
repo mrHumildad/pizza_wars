@@ -22,7 +22,7 @@ function SplashScreen() {
         playsInline
         onEnded={() => navigate('/menu')}
       >
-        <source src="/images/splash.mp4" type="video/mp4" />
+        <source src="./images/splash.mp4" type="video/mp4" />
       </video>
     </div>
   )

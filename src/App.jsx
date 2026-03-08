@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 
 // Context
@@ -33,14 +33,14 @@ function AppContent() {
         {isGameScreen && gameHeaderInfo ? (
           <div className="game-header-info">
             <div className="header-money">{gameHeaderInfo.money}</div>
-            <img src="/images/logo_horiz.png" alt="Pizza Wars" className="header-logo" />
+            <img src="./images/logo_horiz.png" alt="Pizza Wars" className="header-logo" />
             <div className="header-location-date">
               <div className="header-location">{gameHeaderInfo.location}</div>
               <div className="header-date">{gameHeaderInfo.date}</div>
             </div>
           </div>
         ) : (
-          <img src="/images/logo_horiz.png" alt="Pizza Wars" className="header-logo" />
+          <img src="./images/logo_horiz.png" alt="Pizza Wars" className="header-logo" />
         )}
       </header>
       
@@ -75,13 +75,13 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <LanguageProvider>
         <GameHeaderProvider>
           <AppContent />
         </GameHeaderProvider>
       </LanguageProvider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

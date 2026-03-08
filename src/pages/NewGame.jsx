@@ -4,10 +4,10 @@ import { useLanguage } from '../contexts/LanguageContext'
 import { places } from '../logics/places'
 
 const characters = [
-  { id: 1, name: 'Hat', image: '/images/characters/hat.jpg' },
-  { id: 2, name: 'Hoe', image: '/images/characters/hoe.jpg' },
-  { id: 3, name: 'Punk', image: '/images/characters/punk.jpg' },
-  { id: 4, name: 'Tourist', image: '/images/characters/tourist.jpg' },
+  { id: 1, name: 'Hat', image: './images/characters/hat.jpg' },
+  { id: 2, name: 'Hoe', image: './images/characters/hoe.jpg' },
+  { id: 3, name: 'Punk', image: './images/characters/punk.jpg' },
+  { id: 4, name: 'Tourist', image: './images/characters/tourist.jpg' },
 ]
 
 function NewGame() {
