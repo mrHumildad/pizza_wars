@@ -214,3 +214,87 @@ body {
     font-size: 1.75rem;
   }
 }
+
+/* ============================================
+   ENHANCED MOBILE STYLES
+   ============================================ */
+
+@media (max-width: 480px) {
+  :root {
+    --header-height: 50px;
+    --footer-height: 45px;
+    --spacing-xs: 3px;
+    --spacing-sm: 6px;
+    --spacing-md: 12px;
+    --spacing-lg: 18px;
+    --spacing-xl: 24px;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+  
+  .header {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .header h1 {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  
+  .header-logo {
+    height: 30px;
+  }
+  
+  .game-header-info .header-logo {
+    height: 25px;
+  }
+  
+  .header-money {
+    font-size: 1rem;
+  }
+  
+  .header-location-date {
+    align-items: flex-end;
+  }
+  
+  .header-location {
+    font-size: 0.85rem;
+  }
+  
+  .header-date {
+    font-size: 0.75rem;
+  }
+  
+  .main-content {
+    padding: var(--spacing-sm);
+  }
+  
+  .footer {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .footer p {
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  :root {
+    --header-height: 55px;
+    --footer-height: 48px;
+  }
+  
+  .header h1 {
+    font-size: 1.1rem;
+  }
+  
+  .header-logo {
+    height: 35px;
+  }
+  
+  .main-content {
+    padding: var(--spacing-md);
+  }
+}

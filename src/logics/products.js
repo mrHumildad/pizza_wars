@@ -28,8 +28,8 @@ export const products = [
     name: "Pasta",
     description: "Delicious pasta dishes with a variety of sauces, including marinara, alfredo, and pesto.",
     image: "./images/products/pasta.png",
-    minPrice: 400,
-    maxPrice: 1800,
+    minPrice: 1000,
+    maxPrice: 4800,
   },
   {
     id: 5,

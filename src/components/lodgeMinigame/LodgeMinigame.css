@@ -515,3 +515,172 @@
     font-size: 0.9rem;
   }
 }
+
+/* ============================================
+   ENHANCED MOBILE RESPONSIVE STYLES
+   ============================================ */
+
+@media (max-width: 480px) {
+  .lm-container {
+    padding: 8px;
+  }
+  
+  .lm-language-toggle {
+    top: 3px;
+    right: 3px;
+    gap: 4px;
+  }
+  
+  .lm-lang-btn {
+    padding: 4px 8px;
+    font-size: 0.65rem;
+  }
+  
+  .lm-title {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+  
+  .lm-subtitle {
+    font-size: 0.65rem;
+    margin-bottom: 10px;
+  }
+  
+  .lm-grade-display {
+    padding: 8px;
+    margin-bottom: 15px;
+    gap: 6px;
+  }
+  
+  .lm-grade-label {
+    font-size: 0.8rem;
+  }
+  
+  .lm-grade-value {
+    font-size: 1.5rem;
+  }
+  
+  .lm-game-container {
+    gap: 15px;
+  }
+  
+  .lm-hangman-drawing {
+    width: 120px;
+    height: 150px;
+  }
+  
+  .lm-creepy-eye {
+    top: 40px;
+    right: 35px;
+    width: 8px;
+    height: 8px;
+  }
+  
+  .lm-blood-drip {
+    top: 48px;
+    right: 37px;
+    width: 2px;
+    height: 20px;
+  }
+  
+  .lm-game-info {
+    min-width: 100%;
+    max-width: 100%;
+  }
+  
+  .lm-question-box {
+    padding: 10px;
+  }
+  
+  .lm-question-label {
+    font-size: 0.6rem;
+    margin-bottom: 6px;
+    letter-spacing: 2px;
+  }
+  
+  .lm-question-text {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+  
+  .lm-answer-display {
+    margin: 10px 0;
+    gap: 3px;
+  }
+  
+  .lm-letter-box {
+    width: 20px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+  
+  .lm-keyboard {
+    gap: 2px;
+    margin-top: 10px;
+  }
+  
+  .lm-key {
+    width: 24px;
+    height: 28px;
+    font-size: 0.7rem;
+  }
+  
+  .lm-status-info {
+    gap: 12px;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .lm-message {
+    padding: 20px;
+    min-width: 90%;
+  }
+  
+  .lm-message h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .lm-message p {
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .lm-btn {
+    padding: 10px 20px;
+    font-size: 0.75rem;
+  }
+  
+  .lm-question-nav {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .lm-nav-btn {
+    padding: 4px 8px;
+    font-size: 0.6rem;
+  }
+  
+  .lm-question-counter {
+    font-size: 0.65rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 600px) {
+  .lm-title {
+    font-size: 1.3rem;
+  }
+  
+  .lm-hangman-drawing {
+    width: 140px;
+    height: 175px;
+  }
+  
+  .lm-letter-box {
+    width: 22px;
+    height: 30px;
+  }
+}

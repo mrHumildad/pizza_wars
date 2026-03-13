@@ -1658,3 +1658,311 @@
 .back-to-menu-btn {
   margin-top: var(--spacing-md);
 }
+
+/* ============================================
+   MOBILE RESPONSIVE STYLES (max-width: 480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+  /* Splash Screen */
+  .splash-logo h1 {
+    font-size: 2rem;
+  }
+  
+  .splash-logo h2 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+  
+  .splash-video {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  /* Main Menu */
+  .menu-logo h1 {
+    font-size: 2rem;
+  }
+  
+  .menu-logo h2 {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  
+  .menu-buttons {
+    max-width: 240px;
+  }
+  
+  .menu-button {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+  
+  /* New Game Screen */
+  .new-game-screen h1 {
+    font-size: 1.5rem;
+  }
+  
+  .new-game-form {
+    max-width: 300px;
+    padding: 0 10px;
+  }
+  
+  .character-carousel {
+    gap: 10px;
+  }
+  
+  .carousel-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+  
+  .character-display {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .place-display {
+    width: 100px;
+    height: 60px;
+  }
+  
+  .place-name-label {
+    font-size: 0.75rem;
+    max-width: 100px;
+  }
+  
+  /* Game Header */
+  .game-header {
+    padding: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  
+  .game-stat {
+    min-width: 60px;
+  }
+  
+  .game-stat span:first-child {
+    font-size: 0.55rem;
+  }
+  
+  .stat-value {
+    font-size: 1rem;
+  }
+  
+  .location-value {
+    font-size: 0.85rem;
+  }
+  
+  .date-value {
+    font-size: 0.85rem;
+  }
+  
+  /* Tab Navigation */
+  .game-layout {
+    flex-direction: column;
+  }
+  
+  .tab-nav {
+    flex-direction: row;
+    min-width: 100%;
+    justify-content: space-around;
+    padding: 5px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .tab-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  /* Market Tab */
+  .market-header,
+  .market-row {
+    grid-template-columns: 70px 40px 50px 60px 1fr;
+    gap: 4px;
+    font-size: 0.65rem;
+    padding: 4px;
+  }
+  
+  .item-name {
+    font-size: 18px;
+  }
+  
+  .quantity-input {
+    width: 30px;
+    padding: 2px;
+    font-size: 0.65rem;
+  }
+  
+  .action-btn {
+    padding: 2px 4px;
+    font-size: 0.55rem;
+  }
+  
+  /* Tab Panel */
+  .tab-panel {
+    padding: 8px;
+  }
+  
+  .tab-content h3 {
+    font-size: 0.9rem;
+  }
+  
+  /* Destination Cards */
+  .destinations-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .destination-card {
+    height: 100px;
+  }
+  
+  .place-btn {
+    width: 80px;
+    height: 50px;
+  }
+  
+  .place-btn .place-btn-content {
+    font-size: 0.6rem;
+  }
+  
+  /* Travel Mode */
+  .travel-info-bar {
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+  }
+  
+  .travel-buttons {
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .footer-btn {
+    padding: 8px 12px;
+    font-size: 0.7rem;
+  }
+  
+  /* Game Footer */
+  .game-footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px;
+  }
+  
+  /* Game Over Screen */
+  .game-over-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .score-value {
+    font-size: 2rem;
+  }
+  
+  .game-over-buttons {
+    max-width: 220px;
+  }
+  
+  /* How To Play */
+  .how-to-play {
+    padding: 10px;
+  }
+  
+  .how-to-play-title {
+    font-size: 1.4rem;
+  }
+  
+  .howto-section {
+    padding: 10px;
+  }
+  
+  .howto-section h2 {
+    font-size: 0.95rem;
+  }
+  
+  .howto-section p,
+  .howto-section ul {
+    font-size: 0.85rem;
+  }
+  
+  /* Location Tab */
+  .location-tab .location-main {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .location-tab .location-image {
+    width: 100%;
+    height: 150px;
+    min-height: auto;
+  }
+  
+  .location-tab .npc-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Modal */
+  .location-details-modal {
+    padding: 15px;
+    width: 95%;
+  }
+  
+  .location-details-image {
+    height: 150px;
+  }
+  
+  /* Language Toggle */
+  .language-toggle-container {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .lang-btn {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ============================================
+   SMALL TABLET STYLES (481px - 767px)
+   ============================================ */
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .splash-logo h1 {
+    font-size: 3rem;
+  }
+  
+  .menu-logo h1 {
+    font-size: 2.5rem;
+  }
+  
+  .game-stat {
+    min-width: 70px;
+  }
+  
+  .stat-value {
+    font-size: 1.1rem;
+  }
+  
+  .tab-btn {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .market-header,
+  .market-row {
+    grid-template-columns: 80px 50px 60px 80px 1fr;
+  }
+  
+  .destination-card {
+    height: 120px;
+  }
+}
